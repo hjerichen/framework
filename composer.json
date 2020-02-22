@@ -1,0 +1,29 @@
+{
+    "name": "hjerichen/framework",
+    "description": "",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Heiko Jerichen",
+            "email": "heiko@jerichen.de"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "hjerichen/class-instantiator": "^0.0",
+        "phalcon/cli-options-parser": "^1.2"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master",
+        "phpunit/phpunit": "^8.0",
+        "php-coveralls/php-coveralls": "^2.1",
+        "hjerichen/prophecy-php": "^0.0.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "HJerichen\\Framework\\": "src/",
+            "HJerichen\\Framework\\TestHelpers\\": "tests/helpers/"
+        }
+    }
+}
