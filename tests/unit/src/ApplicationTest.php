@@ -1,8 +1,7 @@
 <?php
 
-namespace HJerichen\Framework\Application;
+namespace HJerichen\Framework;
 
-use HJerichen\Framework\Application;
 use HJerichen\Framework\IODevice\IODevice;
 use HJerichen\Framework\Request\Request;
 use HJerichen\Framework\Response\Exception\UnknownRouteException;
