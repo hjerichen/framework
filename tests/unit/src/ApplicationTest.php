@@ -2,6 +2,7 @@
 
 namespace HJerichen\Framework;
 
+use HJerichen\Framework\Configuration\Configuration;
 use HJerichen\Framework\IODevice\IODevice;
 use HJerichen\Framework\Request\Request;
 use HJerichen\Framework\Response\Exception\UnknownRouteException;
@@ -21,13 +22,21 @@ class ApplicationTest extends TestCase
      * @var IODevice | ObjectProphecy
      */
     private $ioDevice;
+    /**
+     * @var Configuration | ObjectProphecy
+     */
+    private $configuration;
 
     public function setUp(): void
     {
         parent::setUp();
 
         $this->ioDevice = $this->prophesize(IODevice::class);
-        $this->application = new Application($this->ioDevice->reveal());
+        $this->configuration = $this->prophesize(Configuration::class);
+        $this->configuration->getTemplateEngine()->willReturn('default');
+        $this->configuration->getTemplateRootPath()->willReturn('/application/tpl');
+
+        $this->application = new Application($this->ioDevice->reveal(), $this->configuration->reveal());
     }
 
 
@@ -79,6 +88,27 @@ class ApplicationTest extends TestCase
         $this->setUpInputUri('/test/44');
 
         $expected = new Response(44);
+        $this->assertOutputResponse($expected);
+    }
+
+    public function testTemplateParsing(): void
+    {
+        $route = new Route('/', TestController::class, 'testTemplateParsing');
+        $this->setUpRoute($route);
+        $this->setUpInputUri('/');
+
+        $expected = new Response('template-file: /application/tpl/test.tpl');
+        $this->assertOutputResponse($expected);
+    }
+
+    public function testTemplateParsingWithParameter(): void
+    {
+        $route = new Route('/{name}', TestController::class, 'testTemplateParsingWithParameter');
+        $this->setUpRoute($route);
+        $this->setUpInputUri('/jon');
+
+        $expectedParameters = var_export(['name' => 'jon'], true);
+        $expected = new Response("template-file: /application/tpl/test.tpl\n{$expectedParameters}");
         $this->assertOutputResponse($expected);
     }
 

@@ -2,10 +2,10 @@
 
 namespace HJerichen\Framework\Route;
 
-use HJerichen\ClassInstantiator\ClassInstantiator;
 use HJerichen\ClassInstantiator\MethodInvoker;
 use HJerichen\Framework\IODevice\InputDevice;
 use HJerichen\Framework\IODevice\IODevice;
+use HJerichen\Framework\ObjectFactory;
 use HJerichen\Framework\Response\Exception\ResponseException;
 use HJerichen\Framework\Response\Exception\UnknownRouteException;
 use HJerichen\Framework\Response\Response;
@@ -15,7 +15,10 @@ use HJerichen\Framework\Response\Response;
  */
 class Router
 {
-
+    /**
+     * @var ObjectFactory
+     */
+    private $objectFactory;
     /**
      * @var IODevice
      */
@@ -24,6 +27,12 @@ class Router
      * @var Route[]
      */
     private $routes = [];
+
+    public function __construct(ObjectFactory $objectFactory)
+    {
+        $this->objectFactory = $objectFactory;
+    }
+
 
     public function addRoute(Route $route): void
     {
@@ -58,10 +67,9 @@ class Router
 
     private function callRoute(Route $route): Response
     {
-        $classInstantiator = new ClassInstantiator();
-        $methodInvoker = new MethodInvoker($classInstantiator);
+        $methodInvoker = new MethodInvoker($this->objectFactory);
 
-        $controller = $classInstantiator->instantiateClass($route->getClass());
+        $controller = $this->objectFactory->instantiateClass($route->getClass());
         $callable = [$controller, $route->getMethod()];
         $predefinedArguments = $this->getPredefinedArgumentsForControllerMethod();
         return $methodInvoker->invokeMethod($callable, $predefinedArguments);

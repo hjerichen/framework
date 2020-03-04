@@ -2,6 +2,7 @@
 
 namespace HJerichen\Framework;
 
+use HJerichen\Framework\Configuration\Configuration;
 use HJerichen\Framework\IODevice\IODevice;
 use HJerichen\Framework\Response\Exception\ResponseException;
 use HJerichen\Framework\Response\Response;
@@ -14,7 +15,7 @@ use HJerichen\Framework\Route\Router;
 class Application
 {
     /**
-     * @var \HJerichen\Framework\IODevice\IODevice
+     * @var IODevice
      */
     private $ioDevice;
     /**
@@ -22,10 +23,10 @@ class Application
      */
     private $router;
 
-    public function __construct(IODevice $ioDevice)
+    public function __construct(IODevice $ioDevice, Configuration $configuration)
     {
         $this->ioDevice = $ioDevice;
-        $this->router = new Router();
+        $this->router = new Router(new ObjectFactory($configuration));
     }
 
     public function addRoute(Route $route): void
