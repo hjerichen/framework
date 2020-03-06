@@ -1,9 +1,7 @@
 <?php
 
-namespace View\TemplateParser;
+namespace HJerichen\Framework\View\TemplateParser;
 
-use HJerichen\Framework\View\TemplateParser\TemplateParser;
-use HJerichen\Framework\View\TemplateParser\TemplateParserPhug;
 use PHPUnit\Framework\TestCase;
 use Phug\Renderer;
 

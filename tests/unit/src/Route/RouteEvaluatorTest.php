@@ -1,10 +1,8 @@
 <?php
 
-namespace Route;
+namespace HJerichen\Framework\Route;
 
 use HJerichen\Framework\Request\Request;
-use HJerichen\Framework\Route\Route;
-use HJerichen\Framework\Route\RouteEvaluator;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
