@@ -11,6 +11,7 @@ use HJerichen\Framework\Response\Response;
 use HJerichen\Framework\Response\TextResponse;
 use HJerichen\Framework\Route\Route;
 use HJerichen\Framework\Route\RouteInterface;
+use HJerichen\Framework\Route\ViewRoute;
 use HJerichen\Framework\TestHelpers\TestController;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -112,6 +113,16 @@ class ApplicationTest extends TestCase
 
         $expectedParameters = var_export(['name' => 'jon'], true);
         $expected = new HtmlResponse("template-file: /application/tpl/test.tpl\n{$expectedParameters}");
+        $this->assertOutputResponse($expected);
+    }
+
+    public function testViewRoute(): void
+    {
+        $route = new ViewRoute('/', 'index');
+        $this->setUpRoute($route);
+        $this->setUpInputUri('/');
+
+        $expected = new HtmlResponse('template-file: /application/tpl/index.tpl');
         $this->assertOutputResponse($expected);
     }
 
