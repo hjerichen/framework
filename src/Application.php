@@ -6,6 +6,7 @@ use HJerichen\Framework\Configuration\Configuration;
 use HJerichen\Framework\IODevice\IODevice;
 use HJerichen\Framework\Response\Exception\ResponseException;
 use HJerichen\Framework\Response\Response;
+use HJerichen\Framework\Response\TextResponse;
 use HJerichen\Framework\Route\Route;
 use HJerichen\Framework\Route\Router;
 
@@ -54,7 +55,7 @@ class Application
 
     private function createResponseForResponseException(ResponseException $responseException): Response
     {
-        $response = new Response();
+        $response = new TextResponse();
         $response->setException($responseException);
         return $response;
     }

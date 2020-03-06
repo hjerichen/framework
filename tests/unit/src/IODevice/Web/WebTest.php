@@ -3,11 +3,11 @@
 namespace HJerichen\Framework\IODevice\Web;
 
 use HJerichen\Framework\IODevice\IODevice;
-use HJerichen\Framework\Mime\MimeType;
 use HJerichen\Framework\Request\Request;
 use HJerichen\Framework\Response\Exception\ResponseException;
 use HJerichen\Framework\Response\Exception\UnknownRouteException;
-use HJerichen\Framework\Response\Response;
+use HJerichen\Framework\Response\HtmlResponse;
+use HJerichen\Framework\Response\TextResponse;
 use HJerichen\ProphecyPHP\PHPProphetTrait;
 use PHPUnit\Framework\TestCase;
 
@@ -107,7 +107,7 @@ class WebTest extends TestCase
     public function testOutputsContent(): void
     {
         $php = $this->prophesizePHP(__NAMESPACE__);
-        $response = new Response('test');
+        $response = new TextResponse('test');
 
         $this->expectOutputString('test');
         $php->header('HTTP/1.0 200')->shouldBeCalledOnce();
@@ -122,7 +122,7 @@ class WebTest extends TestCase
     {
         $php = $this->prophesizePHP(__NAMESPACE__);
         $exception = new UnknownRouteException(new Request('/test'));
-        $response = new Response('test');
+        $response = new TextResponse('test');
         $response->setException($exception);
 
         $this->expectOutputString('No route found for URI: /test');
@@ -138,7 +138,7 @@ class WebTest extends TestCase
     {
         $php = $this->prophesizePHP(__NAMESPACE__);
         $exception = new ResponseException('exception message');
-        $response = new Response('test');
+        $response = new TextResponse('test');
         $response->setException($exception);
 
         $this->expectOutputString('exception message');
@@ -153,8 +153,7 @@ class WebTest extends TestCase
     public function testOutputsHtmlContent(): void
     {
         $php = $this->prophesizePHP(__NAMESPACE__);
-        $response = new Response('test');
-        $response->setMimeType(MimeType::TEXT_HTML);
+        $response = new HtmlResponse('test');
 
         $this->expectOutputString('test');
         $php->header('HTTP/1.0 200')->shouldBeCalledOnce();

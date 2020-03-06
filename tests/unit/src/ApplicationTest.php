@@ -6,7 +6,9 @@ use HJerichen\Framework\Configuration\Configuration;
 use HJerichen\Framework\IODevice\IODevice;
 use HJerichen\Framework\Request\Request;
 use HJerichen\Framework\Response\Exception\UnknownRouteException;
+use HJerichen\Framework\Response\HtmlResponse;
 use HJerichen\Framework\Response\Response;
+use HJerichen\Framework\Response\TextResponse;
 use HJerichen\Framework\Route\Route;
 use HJerichen\Framework\TestHelpers\TestController;
 use PHPUnit\Framework\TestCase;
@@ -48,7 +50,7 @@ class ApplicationTest extends TestCase
         $this->setUpRoute($route);
         $this->setUpInputUri('/');
 
-        $expected = new Response();
+        $expected = new HtmlResponse();
         $this->assertOutputResponse($expected);
     }
 
@@ -58,7 +60,7 @@ class ApplicationTest extends TestCase
         $this->setUpRoute($route);
         $this->setUpInputUri('/');
 
-        $expected = new Response('simple');
+        $expected = new HtmlResponse('simple');
         $this->assertOutputResponse($expected);
     }
 
@@ -77,7 +79,7 @@ class ApplicationTest extends TestCase
         $this->setUpRoute($route);
         $this->setUpInputUri('/test');
 
-        $expected = new Response();
+        $expected = new HtmlResponse();
         $this->assertOutputResponse($expected);
     }
 
@@ -87,7 +89,7 @@ class ApplicationTest extends TestCase
         $this->setUpRoute($route);
         $this->setUpInputUri('/test/44');
 
-        $expected = new Response(44);
+        $expected = new HtmlResponse(44);
         $this->assertOutputResponse($expected);
     }
 
@@ -97,7 +99,7 @@ class ApplicationTest extends TestCase
         $this->setUpRoute($route);
         $this->setUpInputUri('/');
 
-        $expected = new Response('template-file: /application/tpl/test.tpl');
+        $expected = new HtmlResponse('template-file: /application/tpl/test.tpl');
         $this->assertOutputResponse($expected);
     }
 
@@ -108,7 +110,7 @@ class ApplicationTest extends TestCase
         $this->setUpInputUri('/jon');
 
         $expectedParameters = var_export(['name' => 'jon'], true);
-        $expected = new Response("template-file: /application/tpl/test.tpl\n{$expectedParameters}");
+        $expected = new HtmlResponse("template-file: /application/tpl/test.tpl\n{$expectedParameters}");
         $this->assertOutputResponse($expected);
     }
 
@@ -140,7 +142,7 @@ class ApplicationTest extends TestCase
     private function assertOutputWithUnknownRouteException($uri): void
     {
         $expectedException = new UnknownRouteException(new Request($uri));
-        $expected = new Response();
+        $expected = new TextResponse();
         $expected->setException($expectedException);
         $this->assertOutputResponse($expected);
     }

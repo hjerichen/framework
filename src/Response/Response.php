@@ -2,22 +2,17 @@
 
 namespace HJerichen\Framework\Response;
 
-use HJerichen\Framework\Mime\MimeType;
 use HJerichen\Framework\Response\Exception\ResponseException;
 
 /**
  * @author Heiko Jerichen <heiko@jerichen.de>
  */
-class Response
+abstract class Response
 {
     /**
      * @var string
      */
     private $content;
-    /**
-     * @var string
-     */
-    private $mimeType;
     /**
      * @var ResponseException
      */
@@ -26,7 +21,6 @@ class Response
     public function __construct(string $content = '')
     {
         $this->content = $content;
-        $this->mimeType = MimeType::TEXT_PlAIN;
     }
 
     public function getContent(): string
@@ -34,15 +28,7 @@ class Response
         return $this->content;
     }
 
-    public function getMimeType(): string
-    {
-        return $this->mimeType;
-    }
-
-    public function setMimeType(string $mimeType): void
-    {
-        $this->mimeType = $mimeType;
-    }
+    abstract public function getMimeType(): string;
 
     public function setException(ResponseException $exception): void
     {

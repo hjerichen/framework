@@ -4,6 +4,7 @@
 
 namespace HJerichen\Framework\TestHelpers;
 
+use HJerichen\Framework\Response\HtmlResponse;
 use HJerichen\Framework\Response\Response;
 use HJerichen\Framework\View\View;
 
@@ -24,29 +25,29 @@ class TestController
 
     public function emptyResponse(): Response
     {
-        return new Response();
+        return new HtmlResponse();
     }
 
     public function simpleResponse(TestControllerDependency $dependency): Response
     {
-        return new Response('simple');
+        return new HtmlResponse('simple');
     }
 
     public function testParameterResponse(int $id): Response
     {
-        return new Response($id);
+        return new HtmlResponse($id);
     }
 
     public function testTemplateParsing(): Response
     {
         $content = $this->view->parseTemplate('test');
-        return new Response($content);
+        return new HtmlResponse($content);
     }
 
     public function testTemplateParsingWithParameter(string $name): Response
     {
         $parameters = ['name' => $name];
         $content = $this->view->parseTemplate('test', $parameters);
-        return new Response($content);
+        return new HtmlResponse($content);
     }
 }
