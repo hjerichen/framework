@@ -69,7 +69,7 @@ class Router
     {
         $methodInvoker = new MethodInvoker($this->objectFactory);
 
-        $controller = $this->objectFactory->instantiateClass($route->getClass());
+        $controller = $route->getInstantiatedClass($this->objectFactory);
         $callable = [$controller, $route->getMethod()];
         $predefinedArguments = $this->getPredefinedArgumentsForControllerMethod();
         return $methodInvoker->invokeMethod($callable, $predefinedArguments);

@@ -2,6 +2,8 @@
 
 namespace HJerichen\Framework\Route;
 
+use HJerichen\Framework\ObjectFactory;
+
 class Route
 {
     /**
@@ -29,9 +31,9 @@ class Route
         return $this->uri;
     }
 
-    public function getClass(): string
+    public function getInstantiatedClass(ObjectFactory $objectFactory): object
     {
-        return $this->class;
+        return $objectFactory->instantiateClass($this->class);
     }
 
     public function getMethod(): string
