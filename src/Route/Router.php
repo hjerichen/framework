@@ -24,7 +24,7 @@ class Router
      */
     private $inputDevice;
     /**
-     * @var Route[]
+     * @var RouteInterface[]
      */
     private $routes = [];
 
@@ -34,7 +34,7 @@ class Router
     }
 
 
-    public function addRoute(Route $route): void
+    public function addRoute(RouteInterface $route): void
     {
         $this->routes[] = $route;
     }
@@ -53,7 +53,7 @@ class Router
     /**
      * @throws ResponseException
      */
-    private function getRouteForInput(): Route
+    private function getRouteForInput(): RouteInterface
     {
         $routeEvaluator = new RouteEvaluator();
         $request = $this->inputDevice->getRequest();
@@ -65,7 +65,7 @@ class Router
         throw new UnknownRouteException($request);
     }
 
-    private function callRoute(Route $route): Response
+    private function callRoute(RouteInterface $route): Response
     {
         $methodInvoker = new MethodInvoker($this->objectFactory);
 

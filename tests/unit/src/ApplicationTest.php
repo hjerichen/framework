@@ -10,6 +10,7 @@ use HJerichen\Framework\Response\HtmlResponse;
 use HJerichen\Framework\Response\Response;
 use HJerichen\Framework\Response\TextResponse;
 use HJerichen\Framework\Route\Route;
+use HJerichen\Framework\Route\RouteInterface;
 use HJerichen\Framework\TestHelpers\TestController;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -123,7 +124,7 @@ class ApplicationTest extends TestCase
         $this->application->execute();
     }
 
-    private function setUpRoute(Route $route): void
+    private function setUpRoute(RouteInterface $route): void
     {
         $this->application->addRoute($route);
     }

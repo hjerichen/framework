@@ -7,7 +7,7 @@ use HJerichen\Framework\IODevice\IODevice;
 use HJerichen\Framework\Response\Exception\ResponseException;
 use HJerichen\Framework\Response\Response;
 use HJerichen\Framework\Response\TextResponse;
-use HJerichen\Framework\Route\Route;
+use HJerichen\Framework\Route\RouteInterface;
 use HJerichen\Framework\Route\Router;
 
 /**
@@ -30,7 +30,7 @@ class Application
         $this->router = new Router(new ObjectFactory($configuration));
     }
 
-    public function addRoute(Route $route): void
+    public function addRoute(RouteInterface $route): void
     {
         $this->router->addRoute($route);
     }

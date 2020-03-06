@@ -18,7 +18,7 @@ class RouteEvaluator
      */
     private $request;
 
-    public function evaluateRouteForRequest(Route $route, Request $request): bool
+    public function evaluateRouteForRequest(RouteInterface $route, Request $request): bool
     {
         $this->route = $route;
         $this->request = $request;

@@ -4,7 +4,7 @@ namespace HJerichen\Framework\Route;
 
 use HJerichen\Framework\ObjectFactory;
 
-class Route
+class Route implements RouteInterface
 {
     /**
      * @var string
