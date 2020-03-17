@@ -2,15 +2,14 @@
 
 namespace HJerichen\Framework\IODevice\CommandLine;
 
+use HJerichen\Collections\Primitive\StringCollection;
+
 /**
  * @author Heiko Jerichen <heiko@jerichen.de>
  */
 interface ArgumentParser
 {
-    /**
-     * @return array<string>
-     */
-    public function getPlainArguments(): array;
+    public function getPlainArguments(): StringCollection;
 
     /**
      * @return array<string,mixed>

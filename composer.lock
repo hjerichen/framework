@@ -4,24 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "827ff14de32a427cc70ce0bc5a7b54a8",
+    "content-hash": "ef529bb55d09dc556650e303ec08b213",
     "packages": [
         {
             "name": "hjerichen/class-instantiator",
-            "version": "0.0.4",
+            "version": "0.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hjerichen/class-instantiator.git",
-                "reference": "c0d808cbbcf43cc420827c8999ac4edefc93bbf1"
+                "reference": "4899244eda0399c33a32816523e128dec18ef765"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hjerichen/class-instantiator/zipball/c0d808cbbcf43cc420827c8999ac4edefc93bbf1",
-                "reference": "c0d808cbbcf43cc420827c8999ac4edefc93bbf1",
+                "url": "https://api.github.com/repos/hjerichen/class-instantiator/zipball/4899244eda0399c33a32816523e128dec18ef765",
+                "reference": "4899244eda0399c33a32816523e128dec18ef765",
                 "shasum": ""
             },
             "require": {
-                "hjerichen/collections": "^0.0.1",
+                "hjerichen/collections": "^0.0",
                 "php": "^7.2"
             },
             "require-dev": {
@@ -33,7 +33,7 @@
             "autoload": {
                 "psr-4": {
                     "HJerichen\\ClassInstantiator\\": "src/",
-                    "HJerichen\\ClassInstantiator\\TestHelpers\\": "test/helpers/"
+                    "HJerichen\\ClassInstantiator\\TestHelpers\\": "tests/helpers/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -47,20 +47,20 @@
                 }
             ],
             "description": "A factory for objects. Instantiates any class.",
-            "time": "2020-03-14T16:00:11+00:00"
+            "time": "2020-03-17T22:14:49+00:00"
         },
         {
             "name": "hjerichen/collections",
-            "version": "0.0.1",
+            "version": "0.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hjerichen/collections.git",
-                "reference": "ea0f4b6650c910838686c0c71d8a25ec24b49077"
+                "reference": "55424849d2b85610d64005df5dc6bb8a9f5d60fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hjerichen/collections/zipball/ea0f4b6650c910838686c0c71d8a25ec24b49077",
-                "reference": "ea0f4b6650c910838686c0c71d8a25ec24b49077",
+                "url": "https://api.github.com/repos/hjerichen/collections/zipball/55424849d2b85610d64005df5dc6bb8a9f5d60fb",
+                "reference": "55424849d2b85610d64005df5dc6bb8a9f5d60fb",
                 "shasum": ""
             },
             "require": {
@@ -89,20 +89,20 @@
                 }
             ],
             "description": "Collections for daily use.",
-            "time": "2020-03-14T14:35:00+00:00"
+            "time": "2020-03-16T06:08:36+00:00"
         },
         {
             "name": "phalcon/cli-options-parser",
-            "version": "v1.2.0",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phalcon/cli-options-parser.git",
-                "reference": "b3260ed2d77abbc98274ac797fdf5922ed8f4b49"
+                "reference": "9487c84fb320c6b6882c76d4388d039316d234b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phalcon/cli-options-parser/zipball/b3260ed2d77abbc98274ac797fdf5922ed8f4b49",
-                "reference": "b3260ed2d77abbc98274ac797fdf5922ed8f4b49",
+                "url": "https://api.github.com/repos/phalcon/cli-options-parser/zipball/9487c84fb320c6b6882c76d4388d039316d234b9",
+                "reference": "9487c84fb320c6b6882c76d4388d039316d234b9",
                 "shasum": ""
             },
             "require": {
@@ -152,7 +152,7 @@
                 "parser",
                 "terminal"
             ],
-            "time": "2019-10-27T22:34:35+00:00"
+            "time": "2020-03-14T18:48:08+00:00"
         }
     ],
     "packages-dev": [
@@ -1574,6 +1574,7 @@
                 "firebase/php-jwt": "<2",
                 "fooman/tcpdf": "<6.2.22",
                 "fossar/tcpdf-parser": "<6.2.22",
+                "friendsofsymfony/oauth2-php": "<1.3",
                 "friendsofsymfony/rest-bundle": ">=1.2,<1.2.2",
                 "friendsofsymfony/user-bundle": ">=1.2,<1.3.5",
                 "fuel/core": "<1.8.1",
@@ -1585,6 +1586,7 @@
                 "illuminate/cookie": ">=4,<=4.0.11|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.42|>=5.6,<5.6.30",
                 "illuminate/database": ">=4,<4.0.99|>=4.1,<4.1.29",
                 "illuminate/encryption": ">=4,<=4.0.11|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.40|>=5.6,<5.6.15",
+                "illuminate/view": ">=7,<7.1.2",
                 "ivankristianto/phpwhois": "<=4.3",
                 "james-heinrich/getid3": "<1.9.9",
                 "joomla/session": "<1.3.1",
@@ -1592,7 +1594,7 @@
                 "kazist/phpwhois": "<=4.2.6",
                 "kreait/firebase-php": ">=3.2,<3.8.1",
                 "la-haute-societe/tcpdf": "<6.2.22",
-                "laravel/framework": ">=4,<4.0.99|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.42|>=5.6,<5.6.30",
+                "laravel/framework": ">=4,<4.0.99|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.42|>=5.6,<5.6.30|>=7,<7.1.2",
                 "laravel/socialite": ">=1,<1.0.99|>=2,<2.0.10",
                 "league/commonmark": "<0.18.3",
                 "librenms/librenms": "<1.53",
@@ -1764,7 +1766,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2020-03-14T00:01:35+00:00"
+            "time": "2020-03-15T11:13:32+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",

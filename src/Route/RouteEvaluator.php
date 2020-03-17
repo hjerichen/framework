@@ -2,6 +2,7 @@
 
 namespace HJerichen\Framework\Route;
 
+use HJerichen\Collections\Primitive\StringCollection;
 use HJerichen\Framework\Request\Request;
 
 /**
@@ -63,20 +64,16 @@ class RouteEvaluator
         }
     }
 
-    /**
-     * @return array<string>
-     */
-    private function explodeUriFromRoute(): array
+    private function explodeUriFromRoute(): StringCollection
     {
-        return explode('/', $this->route->getUri());
+        $explode = explode('/', $this->route->getUri());
+        return new StringCollection($explode);
     }
 
-    /**
-     * @return array<string>
-     */
-    private function explodeUriFromRequest(): array
+    private function explodeUriFromRequest(): StringCollection
     {
-        return explode('/', $this->request->getUri());
+        $explode = explode('/', $this->request->getUri());
+        return new StringCollection($explode);
     }
 
     private function isParameter(string $routePart): bool

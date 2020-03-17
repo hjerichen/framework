@@ -2,6 +2,7 @@
 
 namespace HJerichen\Framework\IODevice\CommandLine;
 
+use HJerichen\Collections\Primitive\StringCollection;
 use Phalcon\Cop\Parser;
 
 /**
@@ -19,14 +20,12 @@ class ArgumentParserPhalconCop implements ArgumentParser
         $this->parser = new Parser();
     }
 
-    /**
-     * @return array<string>
-     */
-    public function getPlainArguments(): array
+    public function getPlainArguments(): StringCollection
     {
         global $argv;
         $arguments = $this->parser->parse($argv);
-        return $this->extractPlainArguments($arguments);
+        $argumentsPlain = $this->extractPlainArguments($arguments);
+        return new StringCollection($argumentsPlain);
     }
 
     /**

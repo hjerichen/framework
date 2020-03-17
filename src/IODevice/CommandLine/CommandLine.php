@@ -34,7 +34,7 @@ class CommandLine implements IODevice
     private function buildUri(): string
     {
         $plainArguments = $this->argumentParser->getPlainArguments();
-        return '/' . implode('/', $plainArguments);
+        return '/' . implode('/', $plainArguments->asArray());
     }
 
     /**
