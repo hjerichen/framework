@@ -2,6 +2,8 @@
 
 namespace HJerichen\Framework\Request;
 
+use HJerichen\Collections\MixedCollection;
+
 /**
  * @author Heiko Jerichen <heiko@jerichen.de>
  */
@@ -12,13 +14,14 @@ class Request
      */
     private $uri;
     /**
-     * @var array<string,mixed>
+     * @var MixedCollection
      */
-    private $arguments = [];
+    private $arguments;
 
     public function __construct(string $uri)
     {
         $this->uri = $uri;
+        $this->arguments = new MixedCollection();
     }
 
     public function getUri(): string
@@ -26,28 +29,19 @@ class Request
         return $this->uri;
     }
 
-    /**
-     * @return array<string,mixed>
-     */
-    public function getArguments(): array
+    public function getArguments(): MixedCollection
     {
         return $this->arguments;
     }
 
-    /**
-     * @param string $name
-     * @param mixed $value
-     */
     public function addArgument(string $name, $value): void
     {
         $this->arguments[$name] = $value;
     }
 
-    /**
-     * @param array<string,mixed> $arguments
-     */
-    public function addArguments(array $arguments): void
+    public function addArguments(MixedCollection $arguments): void
     {
-        $this->arguments = array_merge($this->arguments, $arguments);
+        $mergedArguments = array_merge($this->arguments->asArray(), $arguments->asArray());
+        $this->arguments = new MixedCollection($mergedArguments);
     }
 }

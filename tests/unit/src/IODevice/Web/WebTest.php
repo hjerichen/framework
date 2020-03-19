@@ -2,6 +2,7 @@
 
 namespace HJerichen\Framework\IODevice\Web;
 
+use HJerichen\Collections\MixedCollection;
 use HJerichen\Framework\IODevice\IODevice;
 use HJerichen\Framework\Request\Request;
 use HJerichen\Framework\Response\Exception\ResponseException;
@@ -72,7 +73,7 @@ class WebTest extends TestCase
         $this->setUpRequestUri('/test?name=jon');
 
         $expectedUri = '/test';
-        $expectedArguments = ['name' => 'jon'];
+        $expectedArguments = new MixedCollection(['name' => 'jon']);
         $this->assertReturnsRequestWith($expectedUri, $expectedArguments);
     }
 
@@ -81,7 +82,7 @@ class WebTest extends TestCase
         $this->setUpRequestUri('/test?name');
 
         $expectedUri = '/test';
-        $expectedArguments = ['name' => true];
+        $expectedArguments = new MixedCollection(['name' => true]);
         $this->assertReturnsRequestWith($expectedUri, $expectedArguments);
     }
 
@@ -90,7 +91,7 @@ class WebTest extends TestCase
         $this->setUpRequestUri('/test?names[]=jon&names[]=max');
 
         $expectedUri = '/test';
-        $expectedArguments = ['names' => ['jon', 'max']];
+        $expectedArguments = new MixedCollection(['names' => ['jon', 'max']]);
         $this->assertReturnsRequestWith($expectedUri, $expectedArguments);
     }
 
@@ -99,7 +100,7 @@ class WebTest extends TestCase
         $this->setUpRequestUri('/test?test&names[]=jon&names[]=max');
 
         $expectedUri = '/test';
-        $expectedArguments = ['test' => true, 'names' => ['jon', 'max']];
+        $expectedArguments = new MixedCollection(['test' => true, 'names' => ['jon', 'max']]);
         $this->assertReturnsRequestWith($expectedUri, $expectedArguments);
     }
 
@@ -171,8 +172,10 @@ class WebTest extends TestCase
         $_SERVER['REQUEST_URI'] = $requestUri;
     }
 
-    private function assertReturnsRequestWith(string $uri, array $arguments = []): void
+    private function assertReturnsRequestWith(string $uri, ?MixedCollection $arguments = null): void
     {
+        $arguments = $arguments ?? new MixedCollection();
+
         $expectedRequest = new Request($uri);
         $expectedRequest->addArguments($arguments);
         $actualRequest = $this->web->getRequest();

@@ -2,6 +2,7 @@
 
 namespace HJerichen\Framework\IODevice\CommandLine;
 
+use HJerichen\Collections\MixedCollection;
 use HJerichen\Framework\IODevice\IODevice;
 use HJerichen\Framework\Request\Request;
 use HJerichen\Framework\Response\Response;
@@ -37,10 +38,7 @@ class CommandLine implements IODevice
         return '/' . implode('/', $plainArguments->asArray());
     }
 
-    /**
-     * @return array<string,string|bool>
-     */
-    private function buildArguments(): array
+    private function buildArguments(): MixedCollection
     {
         return $this->argumentParser->getNamedArguments();
     }

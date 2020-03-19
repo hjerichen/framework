@@ -2,6 +2,7 @@
 
 namespace HJerichen\Framework\IODevice\Web;
 
+use HJerichen\Collections\MixedCollection;
 use HJerichen\Framework\IODevice\IODevice;
 use HJerichen\Framework\Mime\MimeType;
 use HJerichen\Framework\Request\Request;
@@ -37,10 +38,7 @@ class Web implements IODevice
         return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     }
 
-    /**
-     * @return array<string,mixed>
-     */
-    private function getArguments(): array
+    private function getArguments(): MixedCollection
     {
         $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
         $arguments = [];
@@ -52,7 +50,7 @@ class Web implements IODevice
             return $value === '' ? true : $value;
         }, $arguments);
 
-        return $arguments;
+        return new MixedCollection($arguments);
     }
 
     private function outputResponseException(ResponseException $exception): void

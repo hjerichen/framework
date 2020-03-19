@@ -2,6 +2,7 @@
 
 namespace HJerichen\Framework\IODevice\CommandLine;
 
+use HJerichen\Collections\MixedCollection;
 use HJerichen\Framework\IODevice\IODevice;
 use HJerichen\Framework\Request\Request;
 use HJerichen\Framework\Response\Exception\ResponseException;
@@ -73,7 +74,7 @@ class CommandLineTest extends TestCase
         $this->setUpArgv(['file.php', 'test', '-o']);
 
         $expectedUri = '/test';
-        $expectedArguments = ['o' => true];
+        $expectedArguments = new MixedCollection(['o' => true]);
         $this->assertReturnsRequestWith($expectedUri, $expectedArguments);
     }
 
@@ -82,7 +83,7 @@ class CommandLineTest extends TestCase
         $this->setUpArgv(['file.php', 'test', '-o', 'jon']);
 
         $expectedUri = '/test';
-        $expectedArguments = ['o' => 'jon'];
+        $expectedArguments = new MixedCollection(['o' => 'jon']);
         $this->assertReturnsRequestWith($expectedUri, $expectedArguments);
     }
 
@@ -91,7 +92,7 @@ class CommandLineTest extends TestCase
         $this->setUpArgv(['file.php', 'test', '--name', 'jon', '-v', '-l', 'doe']);
 
         $expectedUri = '/test';
-        $expectedArguments = ['name' => 'jon', 'v' => true, 'l' => 'doe'];
+        $expectedArguments = new MixedCollection(['name' => 'jon', 'v' => true, 'l' => 'doe']);
         $this->assertReturnsRequestWith($expectedUri, $expectedArguments);
     }
 
@@ -129,8 +130,10 @@ class CommandLineTest extends TestCase
         $argv = $arguments;
     }
 
-    private function assertReturnsRequestWith(string $uri, array $arguments = []): void
+    private function assertReturnsRequestWith(string $uri, ?MixedCollection $arguments = null): void
     {
+        $arguments = $arguments ?? new MixedCollection();
+
         $expectedRequest = new Request($uri);
         $expectedRequest->addArguments($arguments);
         $actualRequest = $this->commandLine->getRequest();

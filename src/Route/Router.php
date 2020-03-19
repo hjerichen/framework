@@ -3,6 +3,7 @@
 namespace HJerichen\Framework\Route;
 
 use HJerichen\ClassInstantiator\MethodInvoker;
+use HJerichen\Collections\MixedCollection;
 use HJerichen\Framework\IODevice\InputDevice;
 use HJerichen\Framework\IODevice\IODevice;
 use HJerichen\Framework\ObjectFactory;
@@ -72,13 +73,10 @@ class Router
         $controller = $route->getInstantiatedClass($this->objectFactory);
         $callable = [$controller, $route->getMethod()];
         $predefinedArguments = $this->getPredefinedArgumentsForControllerMethod();
-        return $methodInvoker->invokeMethod($callable, $predefinedArguments);
+        return $methodInvoker->invokeMethod($callable, $predefinedArguments->asArray());
     }
 
-    /**
-     * @return array<string,mixed>
-     */
-    private function getPredefinedArgumentsForControllerMethod(): array
+    private function getPredefinedArgumentsForControllerMethod(): MixedCollection
     {
         $request = $this->inputDevice->getRequest();
         return $request->getArguments();

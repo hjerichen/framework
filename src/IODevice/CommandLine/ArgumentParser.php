@@ -2,6 +2,7 @@
 
 namespace HJerichen\Framework\IODevice\CommandLine;
 
+use HJerichen\Collections\MixedCollection;
 use HJerichen\Collections\Primitive\StringCollection;
 
 /**
@@ -11,8 +12,5 @@ interface ArgumentParser
 {
     public function getPlainArguments(): StringCollection;
 
-    /**
-     * @return array<string,mixed>
-     */
-    public function getNamedArguments(): array;
+    public function getNamedArguments(): MixedCollection;
 }

@@ -2,6 +2,7 @@
 
 namespace HJerichen\Framework\IODevice\CommandLine;
 
+use HJerichen\Collections\MixedCollection;
 use HJerichen\Collections\Primitive\StringCollection;
 use Phalcon\Cop\Parser;
 
@@ -28,14 +29,12 @@ class ArgumentParserPhalconCop implements ArgumentParser
         return new StringCollection($argumentsPlain);
     }
 
-    /**
-     * @return array<string,mixed>
-     */
-    public function getNamedArguments(): array
+    public function getNamedArguments(): MixedCollection
     {
         global $argv;
         $arguments = $this->parser->parse($argv);
-        return $this->extractNamedArguments($arguments);
+        $arguments = $this->extractNamedArguments($arguments);
+        return new MixedCollection($arguments);
     }
 
     private function extractPlainArguments(array $arguments): array
