@@ -51,16 +51,16 @@
         },
         {
             "name": "hjerichen/collections",
-            "version": "0.0.3",
+            "version": "0.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hjerichen/collections.git",
-                "reference": "42adb839d327cd43d0834503cbc24ad7ad1f79e0"
+                "reference": "3d7b9e43a23ca08d5ed3ed20c27f8e69767c5fca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hjerichen/collections/zipball/42adb839d327cd43d0834503cbc24ad7ad1f79e0",
-                "reference": "42adb839d327cd43d0834503cbc24ad7ad1f79e0",
+                "url": "https://api.github.com/repos/hjerichen/collections/zipball/3d7b9e43a23ca08d5ed3ed20c27f8e69767c5fca",
+                "reference": "3d7b9e43a23ca08d5ed3ed20c27f8e69767c5fca",
                 "shasum": ""
             },
             "require": {
@@ -89,7 +89,7 @@
                 }
             ],
             "description": "Collections for daily use.",
-            "time": "2020-03-19T13:48:54+00:00"
+            "time": "2020-03-22T22:38:19+00:00"
         },
         {
             "name": "phalcon/cli-options-parser",
