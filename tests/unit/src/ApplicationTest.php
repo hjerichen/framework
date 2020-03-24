@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HJerichen\Framework;
 
@@ -91,7 +91,7 @@ class ApplicationTest extends TestCase
         $this->setUpRoute($route);
         $this->setUpInputUri('/test/44');
 
-        $expected = new HtmlResponse(44);
+        $expected = new HtmlResponse('44');
         $this->assertOutputResponse($expected);
     }
 

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HJerichen\Framework\IODevice\Web;
 
@@ -20,7 +20,7 @@ class Web implements IODevice
         $uri = $this->getUri();
         $arguments = $this->getArguments();
 
-        $response =  new Request($uri);
+        $response = new Request($uri);
         $response->addArguments($arguments);
         return $response;
     }

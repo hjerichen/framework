@@ -1,6 +1,8 @@
 <?php
 /** @noinspection PhpUnused */
 /** @noinspection PhpUnusedParameterInspection */
+declare(strict_types=1);
+
 
 namespace HJerichen\Framework\TestHelpers;
 
@@ -35,7 +37,7 @@ class TestController
 
     public function testParameterResponse(int $id): Response
     {
-        return new HtmlResponse($id);
+        return new HtmlResponse((string)$id);
     }
 
     public function testTemplateParsing(): Response

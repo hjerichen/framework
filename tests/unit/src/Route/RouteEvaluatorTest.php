@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HJerichen\Framework\Route;
 
@@ -106,6 +106,7 @@ class RouteEvaluatorTest extends TestCase
 
     private function expectNoParametersSetToRequest(): void
     {
+        /** @noinspection PhpStrictTypeCheckingInspection */
         $this->request->addArgument(Argument::any(), Argument::any())->shouldNotBeCalled();
     }
 

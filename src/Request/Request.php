@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HJerichen\Framework\Request;
 
@@ -41,7 +41,6 @@ class Request
 
     public function addArguments(MixedCollection $arguments): void
     {
-        $mergedArguments = array_merge($this->arguments->asArray(), $arguments->asArray());
-        $this->arguments = new MixedCollection($mergedArguments);
+        $this->arguments->merge($arguments);
     }
 }
