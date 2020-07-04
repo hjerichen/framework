@@ -26,7 +26,7 @@
     "autoload": {
         "psr-4": {
             "HJerichen\\Framework\\": "src/",
-            "HJerichen\\Framework\\TestHelpers\\": "tests/helpers/"
+            "HJerichen\\Framework\\Test\\": "tests"
         }
     }
 }

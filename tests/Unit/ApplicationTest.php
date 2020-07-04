@@ -13,7 +13,7 @@ use HJerichen\Framework\Response\TextResponse;
 use HJerichen\Framework\Route\Route;
 use HJerichen\Framework\Route\RouteInterface;
 use HJerichen\Framework\Route\ViewRoute;
-use HJerichen\Framework\TestHelpers\TestController;
+use HJerichen\Framework\Test\Helpers\TestController;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 

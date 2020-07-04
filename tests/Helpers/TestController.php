@@ -4,7 +4,7 @@
 declare(strict_types=1);
 
 
-namespace HJerichen\Framework\TestHelpers;
+namespace HJerichen\Framework\Test\Helpers;
 
 use HJerichen\Framework\Response\HtmlResponse;
 use HJerichen\Framework\Response\Response;

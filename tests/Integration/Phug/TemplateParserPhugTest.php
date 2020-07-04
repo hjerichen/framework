@@ -1,8 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace HJerichen\Framework\View\TemplateParser;
+namespace HJerichen\Framework\Test\Integration\Phug;
 
 use HJerichen\Framework\View\Exception\TemplateParserException;
+use HJerichen\Framework\View\TemplateParser\TemplateParser;
+use HJerichen\Framework\View\TemplateParser\TemplateParserPhug;
 use HJerichen\ProphecyPHP\PHPProphetTrait;
 use PHPUnit\Framework\TestCase;
 use Phug\Renderer;

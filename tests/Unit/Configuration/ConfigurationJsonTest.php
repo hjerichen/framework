@@ -1,7 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace HJerichen\Framework\Configuration;
+namespace HJerichen\Framework\Test\Unit\Configuration;
 
+use HJerichen\Framework\Configuration\Configuration;
+use HJerichen\Framework\Configuration\ConfigurationJson;
 use HJerichen\ProphecyPHP\NamespaceProphecy;
 use HJerichen\ProphecyPHP\PHPProphetTrait;
 use PHPUnit\Framework\TestCase;
@@ -33,7 +35,7 @@ class ConfigurationJsonTest extends TestCase
     {
         parent::setUp();
 
-        $this->php = $this->prophesizePHP(__NAMESPACE__);
+        $this->php = $this->prophesizePHP('HJerichen\Framework\Configuration');
 
         $this->configuration = new ConfigurationJson($this->configurationFile);
     }

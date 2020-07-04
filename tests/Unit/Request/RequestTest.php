@@ -1,6 +1,6 @@
 <?php
 
-namespace Request;
+namespace HJerichen\Framework\Test\Unit\Request;
 
 use HJerichen\Collections\MixedCollection;
 use HJerichen\Framework\Request\Request;

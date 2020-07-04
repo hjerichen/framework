@@ -1,8 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace HJerichen\Framework\Route;
+namespace HJerichen\Framework\Test\Unit\Route;
 
 use HJerichen\Framework\Request\Request;
+use HJerichen\Framework\Route\Route;
+use HJerichen\Framework\Route\RouteEvaluator;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -106,7 +108,6 @@ class RouteEvaluatorTest extends TestCase
 
     private function expectNoParametersSetToRequest(): void
     {
-        /** @noinspection PhpStrictTypeCheckingInspection */
         $this->request->addArgument(Argument::any(), Argument::any())->shouldNotBeCalled();
     }
 

@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace HJerichen\Framework\IODevice\CommandLine;
+namespace HJerichen\Framework\Test\Unit\IODevice\CommandLine;
 
 use HJerichen\Collections\MixedCollection;
+use HJerichen\Framework\IODevice\CommandLine\CommandLine;
 use HJerichen\Framework\IODevice\IODevice;
 use HJerichen\Framework\Request\Request;
 use HJerichen\Framework\Response\Exception\ResponseException;
@@ -98,7 +99,7 @@ class CommandLineTest extends TestCase
 
     public function testOutputsContentToStdOut(): void
     {
-        $php = $this->prophesizePHP(__NAMESPACE__);
+        $php = $this->prophesizePHP('HJerichen\Framework\IODevice\CommandLine');
         $response = new TextResponse('test');
 
         $php->fwrite(STDOUT, 'test')->shouldBeCalledOnce();
@@ -109,7 +110,7 @@ class CommandLineTest extends TestCase
 
     public function testOutputsExceptionToStdOut(): void
     {
-        $php = $this->prophesizePHP(__NAMESPACE__);
+        $php = $this->prophesizePHP('HJerichen\Framework\IODevice\CommandLine');
         $exception = new ResponseException('exception message');
         $response = new TextResponse('test');
         $response->setException($exception);

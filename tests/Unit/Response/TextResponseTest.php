@@ -1,17 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace HJerichen\Framework\Response;
+namespace HJerichen\Framework\Test\Unit\Response;
 
 use HJerichen\Framework\Mime\MimeType;
+use HJerichen\Framework\Response\Response;
+use HJerichen\Framework\Response\TextResponse;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @author Heiko Jerichen <heiko@jerichen.de>
  */
-class CustomResponseTest extends TestCase
+class TextResponseTest extends TestCase
 {
     /**
-     * @var CustomResponse
+     * @var TextResponse
      */
     private $response;
 
@@ -22,7 +24,7 @@ class CustomResponseTest extends TestCase
     {
         parent::setUp();
 
-        $this->response = new CustomResponse();
+        $this->response = new TextResponse();
     }
 
 
@@ -35,18 +37,9 @@ class CustomResponseTest extends TestCase
         $this->assertInstanceOf($expected, $actual);
     }
 
-    public function testGettingDefaultMimeType(): void
+    public function testGettingMimeType(): void
     {
         $expected = MimeType::TEXT_PlAIN;
-        $actual = $this->response->getMimeType();
-        $this->assertEquals($expected, $actual);
-    }
-
-    public function testSettingMimeType(): void
-    {
-        $this->response->setMimeType(MimeType::TEXT_HTML);
-
-        $expected = MimeType::TEXT_HTML;
         $actual = $this->response->getMimeType();
         $this->assertEquals($expected, $actual);
     }

@@ -1,9 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace HJerichen\Framework\IODevice\Web;
+namespace HJerichen\Framework\Test\Unit\IODevice\Web;
 
 use HJerichen\Collections\MixedCollection;
 use HJerichen\Framework\IODevice\IODevice;
+use HJerichen\Framework\IODevice\Web\Web;
 use HJerichen\Framework\Request\Request;
 use HJerichen\Framework\Response\Exception\ResponseException;
 use HJerichen\Framework\Response\Exception\UnknownRouteException;
@@ -107,7 +108,7 @@ class WebTest extends TestCase
     /** @noinspection PhpUndefinedMethodInspection */
     public function testOutputsContent(): void
     {
-        $php = $this->prophesizePHP(__NAMESPACE__);
+        $php = $this->prophesizePHP('HJerichen\Framework\IODevice\Web');
         $response = new TextResponse('test');
 
         $this->expectOutputString('test');
@@ -121,7 +122,7 @@ class WebTest extends TestCase
     /** @noinspection PhpUndefinedMethodInspection */
     public function testOutputForUnknownRoute(): void
     {
-        $php = $this->prophesizePHP(__NAMESPACE__);
+        $php = $this->prophesizePHP('HJerichen\Framework\IODevice\Web');
         $exception = new UnknownRouteException(new Request('/test'));
         $response = new TextResponse('test');
         $response->setException($exception);
@@ -137,7 +138,7 @@ class WebTest extends TestCase
     /** @noinspection PhpUndefinedMethodInspection */
     public function testOutputForResponseException(): void
     {
-        $php = $this->prophesizePHP(__NAMESPACE__);
+        $php = $this->prophesizePHP('HJerichen\Framework\IODevice\Web');
         $exception = new ResponseException('exception message');
         $response = new TextResponse('test');
         $response->setException($exception);
@@ -153,7 +154,7 @@ class WebTest extends TestCase
     /** @noinspection PhpUndefinedMethodInspection */
     public function testOutputsHtmlContent(): void
     {
-        $php = $this->prophesizePHP(__NAMESPACE__);
+        $php = $this->prophesizePHP('HJerichen\Framework\IODevice\Web');
         $response = new HtmlResponse('test');
 
         $this->expectOutputString('test');

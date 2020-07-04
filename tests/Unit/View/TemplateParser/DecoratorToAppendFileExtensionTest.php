@@ -1,10 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace HJerichen\Framework\View\TemplateParser;
+namespace HJerichen\Framework\Test\Unit\View\TemplateParser;
 
+use HJerichen\Framework\View\TemplateParser\DecoratorToAppendFileExtension;
+use HJerichen\Framework\View\TemplateParser\TemplateParser;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 
+/**
+ * @author Heiko Jerichen <heiko@jerichen.de>
+ */
 class DecoratorToAppendFileExtensionTest extends TestCase
 {
     /** @var DecoratorToAppendFileExtension  */

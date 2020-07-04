@@ -1,19 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace HJerichen\Framework\Response;
+namespace HJerichen\Framework\Test\Unit\Response;
 
 use HJerichen\Framework\Mime\MimeType;
+use HJerichen\Framework\Response\HtmlResponse;
+use HJerichen\Framework\Response\Response;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class JsonResponseTest
- * @package Response
  * @author Heiko Jerichen <heiko@jerichen.de>
  */
-class JsonResponseTest extends TestCase
+class HtmlResponseTest extends TestCase
 {
     /**
-     * @var JsonResponse
+     * @var HtmlResponse
      */
     private $response;
 
@@ -24,13 +24,13 @@ class JsonResponseTest extends TestCase
     {
         parent::setUp();
 
-        $this->response = new JsonResponse();
+        $this->response = new HtmlResponse();
     }
 
 
     /* TESTS */
 
-    public function testClassImplementsCorrectInterface(): void
+    public function testImplementsCorrectInterface(): void
     {
         $expected = Response::class;
         $actual = $this->response;
@@ -39,9 +39,11 @@ class JsonResponseTest extends TestCase
 
     public function testGettingMimeType(): void
     {
-        $expected = MimeType::TEXT_JSON;
+        $expected = MimeType::TEXT_HTML;
         $actual = $this->response->getMimeType();
         $this->assertEquals($expected, $actual);
     }
+
+
     /* HELPERS */
 }
