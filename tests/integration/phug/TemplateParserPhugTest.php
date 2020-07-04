@@ -2,6 +2,8 @@
 
 namespace HJerichen\Framework\View\TemplateParser;
 
+use HJerichen\Framework\View\Exception\TemplateParserException;
+use HJerichen\ProphecyPHP\PHPProphetTrait;
 use PHPUnit\Framework\TestCase;
 use Phug\Renderer;
 
@@ -10,9 +12,9 @@ use Phug\Renderer;
  */
 class TemplateParserPhugTest extends TestCase
 {
-    /**
-     * @var TemplateParserPhug
-     */
+    use PHPProphetTrait;
+
+    /** @var TemplateParserPhug */
     private $templateParser;
 
     /**
@@ -22,8 +24,8 @@ class TemplateParserPhugTest extends TestCase
     {
         parent::setUp();
 
-        $renderer = new Renderer();
-        $this->templateParser = new TemplateParserPhug($renderer);
+        $this->preparePHPFunctions();
+        $this->createNewTemplateParserForTest();
     }
 
 
@@ -75,11 +77,42 @@ class TemplateParserPhugTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    public function testThrowsExceptionIfNotPugFile(): void
+    {
+        $templateFile = '/to/file.tpl';
+
+        $this->expectException(TemplateParserException::class);
+        $this->templateParser->parseTemplate($templateFile);
+    }
+
+    public function testThrowsExceptionIfFileDoesNotExist(): void
+    {
+        $templateFile = $this->getTemplateFile('something');
+
+        $this->expectException(TemplateParserException::class);
+        $this->templateParser->parseTemplate($templateFile);
+    }
+
 
     /* HELPERS */
 
     private function getTemplateFile(string $template): string
     {
         return __DIR__ . "/templates/{$template}.pug";
+    }
+
+    protected function createNewTemplateParserForTest(): void
+    {
+        $renderer = new Renderer();
+        $this->templateParser = new TemplateParserPhug($renderer);
+    }
+
+    private function preparePHPFunctions(): void
+    {
+        $php = $this->prophesizePHP(__NAMESPACE__);
+        $php->prepare('file_exists');
+
+        $php = $this->prophesizePHP('Phug\Renderer\Profiler');
+        $php->prepare('memory_get_usage', 'microtime');
     }
 }

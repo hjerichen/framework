@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace HJerichen\Framework;
+namespace HJerichen\Framework\Test\Unit;
 
+use HJerichen\Framework\Application;
 use HJerichen\Framework\Configuration\Configuration;
 use HJerichen\Framework\IODevice\IODevice;
 use HJerichen\Framework\Request\Request;
@@ -16,19 +17,16 @@ use HJerichen\Framework\TestHelpers\TestController;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 
+/**
+ * @author Heiko Jerichen <heiko@jerichen.de>
+ */
 class ApplicationTest extends TestCase
 {
-    /**
-     * @var Application
-     */
+    /** @var Application */
     private $application;
-    /**
-     * @var IODevice | ObjectProphecy
-     */
+    /** @var IODevice | ObjectProphecy */
     private $ioDevice;
-    /**
-     * @var Configuration | ObjectProphecy
-     */
+    /** @var Configuration | ObjectProphecy */
     private $configuration;
 
     public function setUp(): void
@@ -37,8 +35,8 @@ class ApplicationTest extends TestCase
 
         $this->ioDevice = $this->prophesize(IODevice::class);
         $this->configuration = $this->prophesize(Configuration::class);
-        $this->configuration->getTemplateEngine()->willReturn('default');
-        $this->configuration->getTemplateRootPath()->willReturn('/application/tpl');
+
+        $this->setUpConfiguration();
 
         $this->application = new Application($this->ioDevice->reveal(), $this->configuration->reveal());
     }
@@ -129,10 +127,10 @@ class ApplicationTest extends TestCase
 
     /* HELPERS */
 
-    private function assertOutputResponse(Response $expected): void
+    private function setUpConfiguration(): void
     {
-        $this->ioDevice->outputResponse($expected)->shouldBeCalledOnce();
-        $this->application->execute();
+        $this->configuration->getTemplateEngine()->willReturn('simple-output');
+        $this->configuration->getTemplateRootPath()->willReturn('/application/tpl');
     }
 
     private function setUpRoute(RouteInterface $route): void
@@ -157,5 +155,11 @@ class ApplicationTest extends TestCase
         $expected = new TextResponse();
         $expected->setException($expectedException);
         $this->assertOutputResponse($expected);
+    }
+
+    private function assertOutputResponse(Response $expected): void
+    {
+        $this->ioDevice->outputResponse($expected)->shouldBeCalledOnce();
+        $this->application->execute();
     }
 }

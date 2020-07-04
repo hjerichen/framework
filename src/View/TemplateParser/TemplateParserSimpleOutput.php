@@ -5,7 +5,7 @@ namespace HJerichen\Framework\View\TemplateParser;
 /**
  * @author Heiko Jerichen <heiko@jerichen.de>
  */
-class TemplateParserDefault implements TemplateParser
+class TemplateParserSimpleOutput extends TemplateParser
 {
     public function parseTemplate(string $templateFile, array $parameters = []): string
     {
