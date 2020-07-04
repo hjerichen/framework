@@ -4,9 +4,9 @@ namespace HJerichen\Framework\Test\Unit\Configuration;
 
 use HJerichen\Framework\Configuration\Configuration;
 use HJerichen\Framework\Configuration\ConfigurationJson;
+use HJerichen\Framework\Test\Library\TestCase;
 use HJerichen\ProphecyPHP\NamespaceProphecy;
 use HJerichen\ProphecyPHP\PHPProphetTrait;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @author Heiko Jerichen <heiko@jerichen.de>
@@ -15,17 +15,13 @@ class ConfigurationJsonTest extends TestCase
 {
     use PHPProphetTrait;
 
-    /**
-     * @var ConfigurationJson
-     */
+    /** @var ConfigurationJson */
     private $configuration;
-    /**
-     * @var string
-     */
+
+    /** @var string */
     private $configurationFile = '/configuration.json';
-    /**
-     * @var NamespaceProphecy
-     */
+
+    /** @var NamespaceProphecy */
     private $php;
 
     /**
@@ -35,7 +31,7 @@ class ConfigurationJsonTest extends TestCase
     {
         parent::setUp();
 
-        $this->php = $this->prophesizePHP('HJerichen\Framework\Configuration');
+        $this->php = $this->prophesizePHP($this->getNamespaceFoClass(ConfigurationJson::class));
 
         $this->configuration = new ConfigurationJson($this->configurationFile);
     }

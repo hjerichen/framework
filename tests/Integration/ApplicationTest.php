@@ -10,8 +10,9 @@ use HJerichen\Framework\Response\HtmlResponse;
 use HJerichen\Framework\Response\Response;
 use HJerichen\Framework\Route\RouteInterface;
 use HJerichen\Framework\Route\ViewRoute;
+use HJerichen\Framework\Test\Library\TestCase;
+use HJerichen\Framework\Test\Library\Utility\HelperDirectory;
 use HJerichen\ProphecyPHP\PHPProphetTrait;
-use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 
 /**
@@ -23,8 +24,10 @@ class ApplicationTest extends TestCase
 
     /** @var Application */
     private $application;
+
     /** @var IODevice | ObjectProphecy */
     private $ioDevice;
+
     /** @var Configuration | ObjectProphecy */
     private $configuration;
 
@@ -35,7 +38,6 @@ class ApplicationTest extends TestCase
         $this->ioDevice = $this->prophesize(IODevice::class);
         $this->configuration = $this->prophesize(Configuration::class);
 
-        $this->preparePHPFunctions();
         $this->setUpConfiguration();
 
         $this->application = new Application($this->ioDevice->reveal(), $this->configuration->reveal());
@@ -56,8 +58,10 @@ class ApplicationTest extends TestCase
 
     private function setUpConfiguration(): void
     {
+        $directoryOfTemplates = new HelperDirectory($this, 'templates');
+
         $this->configuration->getTemplateEngine()->willReturn('default');
-        $this->configuration->getTemplateRootPath()->willReturn(__DIR__ . '/_ApplicationTest_/templates');
+        $this->configuration->getTemplateRootPath()->willReturn($directoryOfTemplates);
     }
 
     private function setUpRoute(RouteInterface $route): void
@@ -69,18 +73,6 @@ class ApplicationTest extends TestCase
     {
         $request = new Request($inputUri);
         $this->ioDevice->getRequest()->willReturn($request);
-    }
-
-    private function preparePHPFunctions(): void
-    {
-        $php = $this->prophesizePHP('Phug\Renderer\Profiler');
-        $php->prepare('memory_get_usage', 'microtime');
-
-        $php = $this->prophesizePHP('HJerichen\Framework');
-        $php->prepare('class_exists');
-
-        $php = $this->prophesizePHP('HJerichen\Framework\View\TemplateParser');
-        $php->prepare('file_get_contents', 'file_exists');
     }
 
     private function assertOutputEquals(Response $expectedResponse): void

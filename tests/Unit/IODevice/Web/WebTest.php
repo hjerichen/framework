@@ -10,8 +10,9 @@ use HJerichen\Framework\Response\Exception\ResponseException;
 use HJerichen\Framework\Response\Exception\UnknownRouteException;
 use HJerichen\Framework\Response\HtmlResponse;
 use HJerichen\Framework\Response\TextResponse;
+use HJerichen\Framework\Test\Library\TestCase;
+use HJerichen\ProphecyPHP\NamespaceProphecy;
 use HJerichen\ProphecyPHP\PHPProphetTrait;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @author Heiko Jerichen <heiko@jerichen.de>
@@ -20,10 +21,11 @@ class WebTest extends TestCase
 {
     use PHPProphetTrait;
 
-    /**
-     * @var Web
-     */
+    /** @var Web */
     private $web;
+
+    /** @var NamespaceProphecy */
+    private $php;
 
     /**
      *
@@ -31,6 +33,8 @@ class WebTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->php = $this->prophesizePHP($this->getNamespaceFoClass(Web::class));
 
         $this->web = new Web();
     }
@@ -108,13 +112,12 @@ class WebTest extends TestCase
     /** @noinspection PhpUndefinedMethodInspection */
     public function testOutputsContent(): void
     {
-        $php = $this->prophesizePHP('HJerichen\Framework\IODevice\Web');
         $response = new TextResponse('test');
 
         $this->expectOutputString('test');
-        $php->header('HTTP/1.0 200')->shouldBeCalledOnce();
-        $php->header('Content-type: text/plain')->shouldBeCalledOnce();
-        $php->reveal();
+        $this->php->header('HTTP/1.0 200')->shouldBeCalledOnce();
+        $this->php->header('Content-type: text/plain')->shouldBeCalledOnce();
+        $this->php->reveal();
 
         $this->web->outputResponse($response);
     }
@@ -122,15 +125,14 @@ class WebTest extends TestCase
     /** @noinspection PhpUndefinedMethodInspection */
     public function testOutputForUnknownRoute(): void
     {
-        $php = $this->prophesizePHP('HJerichen\Framework\IODevice\Web');
         $exception = new UnknownRouteException(new Request('/test'));
         $response = new TextResponse('test');
         $response->setException($exception);
 
         $this->expectOutputString('No route found for URI: /test');
-        $php->header('HTTP/1.0 404')->shouldBeCalledOnce();
-        $php->header('Content-type: text/plain')->shouldBeCalledOnce();
-        $php->reveal();
+        $this->php->header('HTTP/1.0 404')->shouldBeCalledOnce();
+        $this->php->header('Content-type: text/plain')->shouldBeCalledOnce();
+        $this->php->reveal();
 
         $this->web->outputResponse($response);
     }
@@ -138,15 +140,14 @@ class WebTest extends TestCase
     /** @noinspection PhpUndefinedMethodInspection */
     public function testOutputForResponseException(): void
     {
-        $php = $this->prophesizePHP('HJerichen\Framework\IODevice\Web');
         $exception = new ResponseException('exception message');
         $response = new TextResponse('test');
         $response->setException($exception);
 
         $this->expectOutputString('exception message');
-        $php->header('HTTP/1.0 500')->shouldBeCalledOnce();
-        $php->header('Content-type: text/plain')->shouldBeCalledOnce();
-        $php->reveal();
+        $this->php->header('HTTP/1.0 500')->shouldBeCalledOnce();
+        $this->php->header('Content-type: text/plain')->shouldBeCalledOnce();
+        $this->php->reveal();
 
         $this->web->outputResponse($response);
     }
@@ -154,13 +155,12 @@ class WebTest extends TestCase
     /** @noinspection PhpUndefinedMethodInspection */
     public function testOutputsHtmlContent(): void
     {
-        $php = $this->prophesizePHP('HJerichen\Framework\IODevice\Web');
         $response = new HtmlResponse('test');
 
         $this->expectOutputString('test');
-        $php->header('HTTP/1.0 200')->shouldBeCalledOnce();
-        $php->header('Content-type: text/html')->shouldBeCalledOnce();
-        $php->reveal();
+        $this->php->header('HTTP/1.0 200')->shouldBeCalledOnce();
+        $this->php->header('Content-type: text/html')->shouldBeCalledOnce();
+        $this->php->reveal();
 
         $this->web->outputResponse($response);
     }

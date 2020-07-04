@@ -8,8 +8,8 @@ use HJerichen\Framework\IODevice\IODevice;
 use HJerichen\Framework\Request\Request;
 use HJerichen\Framework\Response\Exception\ResponseException;
 use HJerichen\Framework\Response\TextResponse;
+use HJerichen\Framework\Test\Library\TestCase;
 use HJerichen\ProphecyPHP\PHPProphetTrait;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @author Heiko Jerichen <heiko@jerichen.de>
@@ -99,7 +99,7 @@ class CommandLineTest extends TestCase
 
     public function testOutputsContentToStdOut(): void
     {
-        $php = $this->prophesizePHP('HJerichen\Framework\IODevice\CommandLine');
+        $php = $this->prophesizePHP($this->getNamespaceFoClass(CommandLine::class));
         $response = new TextResponse('test');
 
         $php->fwrite(STDOUT, 'test')->shouldBeCalledOnce();
@@ -110,7 +110,7 @@ class CommandLineTest extends TestCase
 
     public function testOutputsExceptionToStdOut(): void
     {
-        $php = $this->prophesizePHP('HJerichen\Framework\IODevice\CommandLine');
+        $php = $this->prophesizePHP($this->getNamespaceFoClass(CommandLine::class));
         $exception = new ResponseException('exception message');
         $response = new TextResponse('test');
         $response->setException($exception);

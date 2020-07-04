@@ -2,13 +2,13 @@
 
 namespace HJerichen\Framework\Test\Unit\View\TemplateParser;
 
+use HJerichen\Framework\Test\Library\TestCase;
 use HJerichen\Framework\View\Exception\TemplateParserException;
 use HJerichen\Framework\View\TemplateParser\TemplateParser;
 use HJerichen\Framework\View\TemplateParser\TemplateParserCollection;
 use HJerichen\Framework\View\TemplateParser\TemplateParserSmart;
 use HJerichen\ProphecyPHP\NamespaceProphecy;
 use HJerichen\ProphecyPHP\PHPProphetTrait;
-use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 
 class TemplateParserSmartTest extends TestCase
@@ -37,7 +37,7 @@ class TemplateParserSmartTest extends TestCase
         $this->templateParserCollection = new TemplateParserCollection();
         $this->templateParser1 = $this->prophesize(TemplateParser::class);
         $this->templateParser2 = $this->prophesize(TemplateParser::class);
-        $this->php = $this->prophesizePHP('HJerichen\Framework\View\TemplateParser');
+        $this->php = $this->prophesizePHP($this->getNamespaceFoClass(TemplateParserSmart::class));
 
         $this->setUpTemplateParserCollection();
         $this->preparePHPFunctions();

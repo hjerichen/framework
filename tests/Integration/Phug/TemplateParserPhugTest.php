@@ -2,11 +2,11 @@
 
 namespace HJerichen\Framework\Test\Integration\Phug;
 
+use HJerichen\Framework\Test\Library\TestCase;
 use HJerichen\Framework\View\Exception\TemplateParserException;
 use HJerichen\Framework\View\TemplateParser\TemplateParser;
 use HJerichen\Framework\View\TemplateParser\TemplateParserPhug;
 use HJerichen\ProphecyPHP\PHPProphetTrait;
-use PHPUnit\Framework\TestCase;
 use Phug\Renderer;
 
 /**
@@ -26,7 +26,6 @@ class TemplateParserPhugTest extends TestCase
     {
         parent::setUp();
 
-        $this->preparePHPFunctions();
         $this->createNewTemplateParserForTest();
     }
 
@@ -107,14 +106,5 @@ class TemplateParserPhugTest extends TestCase
     {
         $renderer = new Renderer();
         $this->templateParser = new TemplateParserPhug($renderer);
-    }
-
-    private function preparePHPFunctions(): void
-    {
-        $php = $this->prophesizePHP(__NAMESPACE__);
-        $php->prepare('file_exists');
-
-        $php = $this->prophesizePHP('Phug\Renderer\Profiler');
-        $php->prepare('memory_get_usage', 'microtime');
     }
 }

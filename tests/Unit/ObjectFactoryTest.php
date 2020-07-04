@@ -5,6 +5,7 @@ namespace HJerichen\Framework\Test\Unit;
 use HJerichen\ClassInstantiator\ClassInstantiator;
 use HJerichen\Framework\Configuration\Configuration;
 use HJerichen\Framework\ObjectFactory;
+use HJerichen\Framework\Test\Library\TestCase;
 use HJerichen\Framework\View\TemplateParser\DecoratorToAppendFileExtension;
 use HJerichen\Framework\View\TemplateParser\TemplateParserCollection;
 use HJerichen\Framework\View\TemplateParser\TemplateParserHtml;
@@ -13,7 +14,6 @@ use HJerichen\Framework\View\TemplateParser\TemplateParserPhug;
 use HJerichen\Framework\View\TemplateParser\TemplateParserSmart;
 use HJerichen\ProphecyPHP\NamespaceProphecy;
 use HJerichen\ProphecyPHP\PHPProphetTrait;
-use PHPUnit\Framework\TestCase;
 use Phug\Renderer;
 use Prophecy\Prophecy\ObjectProphecy;
 
@@ -36,9 +36,8 @@ class ObjectFactoryTest extends TestCase
         parent::setUp();
 
         $this->configuration = $this->prophesize(Configuration::class);
-        $this->php = $this->prophesizePHP('HJerichen\Framework');
+        $this->php = $this->prophesizePHP($this->getNamespaceFoClass(ObjectFactory::class));
 
-        $this->preparePHPFunctions();
         $this->createNewObjectFactoryForTest();
     }
 
@@ -119,14 +118,9 @@ class ObjectFactoryTest extends TestCase
         $this->objectFactory = new ObjectFactory($this->configuration->reveal());
     }
 
-    private function preparePHPFunctions(): void
-    {
-        $this->php->prepare('class_exists');
-    }
-
     private function mockPHPFunctionsForPhug(): void
     {
-        $php = $this->prophesizePHP('Phug\Renderer\Profiler');
+        $php = $this->prophesizePHP($this->getNamespaceFoClass(Renderer\Profiler\Profile::class));
 
         /** @noinspection PhpUndefinedMethodInspection */
         $php->memory_get_usage()->willReturn(11);

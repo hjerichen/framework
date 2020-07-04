@@ -2,12 +2,12 @@
 
 namespace HJerichen\Framework\Test\Unit\View\TemplateParser;
 
+use HJerichen\Framework\Test\Library\TestCase;
 use HJerichen\Framework\View\Exception\TemplateParserException;
 use HJerichen\Framework\View\TemplateParser\TemplateParser;
 use HJerichen\Framework\View\TemplateParser\TemplateParserHtml;
 use HJerichen\ProphecyPHP\NamespaceProphecy;
 use HJerichen\ProphecyPHP\PHPProphetTrait;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @author Heiko Jerichen <heiko@jerichen.de>
@@ -23,7 +23,7 @@ class TemplateParserHtmlTest extends TestCase
 
     public function setUp(): void
     {
-        $this->php = $this->prophesizePHP('HJerichen\Framework\View\TemplateParser');
+        $this->php = $this->prophesizePHP($this->getNamespaceFoClass(TemplateParser::class));
         $this->php->prepare('file_get_contents', 'file_exists');
 
         $this->templateParser = new TemplateParserHtml();
