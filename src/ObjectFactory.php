@@ -24,6 +24,7 @@ class ObjectFactory extends ClassInstantiator
 
     public function __construct(Configuration $configuration)
     {
+        parent::__construct();
         $this->configuration = $configuration;
     }
 
@@ -41,8 +42,7 @@ class ObjectFactory extends ClassInstantiator
                 $templateParser = $this->createSmartTemplateParser();
                 break;
         }
-        $templateParser = new DecoratorToAppendFileExtension($templateParser);
-        return $templateParser;
+        return new DecoratorToAppendFileExtension($templateParser);
     }
 
     /** @noinspection PhpFullyQualifiedNameUsageInspection */
