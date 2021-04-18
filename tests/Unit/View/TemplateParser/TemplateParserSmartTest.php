@@ -9,11 +9,13 @@ use HJerichen\Framework\View\TemplateParser\TemplateParserCollection;
 use HJerichen\Framework\View\TemplateParser\TemplateParserSmart;
 use HJerichen\ProphecyPHP\NamespaceProphecy;
 use HJerichen\ProphecyPHP\PHPProphetTrait;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 
 class TemplateParserSmartTest extends TestCase
 {
     use PHPProphetTrait;
+    use ProphecyTrait;
 
     /** @var TemplateParserSmart */
     private $templateParserSmart;

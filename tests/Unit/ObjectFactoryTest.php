@@ -15,6 +15,7 @@ use HJerichen\Framework\View\TemplateParser\TemplateParserSmart;
 use HJerichen\ProphecyPHP\NamespaceProphecy;
 use HJerichen\ProphecyPHP\PHPProphetTrait;
 use Phug\Renderer;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 
 /**
@@ -23,6 +24,7 @@ use Prophecy\Prophecy\ObjectProphecy;
 class ObjectFactoryTest extends TestCase
 {
     use PHPProphetTrait;
+    use ProphecyTrait;
 
     /** @var ObjectFactory */
     private $objectFactory;

@@ -19,7 +19,7 @@ class CommandLine implements IODevice
 
     public function __construct()
     {
-        $this->argumentParser = new ArgumentParserPhalconCop();
+        $this->argumentParser = new ArgumentParserSimple();
     }
 
     public function getRequest(): Request

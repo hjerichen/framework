@@ -5,6 +5,7 @@ namespace HJerichen\Framework\Test\Unit\View\TemplateParser;
 use HJerichen\Framework\View\TemplateParser\DecoratorToAppendFileExtension;
 use HJerichen\Framework\View\TemplateParser\TemplateParser;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 
 /**
@@ -12,6 +13,8 @@ use Prophecy\Prophecy\ObjectProphecy;
  */
 class DecoratorToAppendFileExtensionTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var DecoratorToAppendFileExtension  */
     private $decorator;
     /** @var ObjectProphecy */

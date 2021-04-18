@@ -7,6 +7,7 @@ use HJerichen\Framework\Route\Route;
 use HJerichen\Framework\Route\RouteEvaluator;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 
 /**
@@ -14,6 +15,8 @@ use Prophecy\Prophecy\ObjectProphecy;
  */
 class RouteEvaluatorTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var RouteEvaluator
      */
