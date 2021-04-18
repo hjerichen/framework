@@ -12,14 +12,8 @@ use PHPUnit\Framework\TestCase;
  */
 class CustomResponseTest extends TestCase
 {
-    /**
-     * @var CustomResponse
-     */
-    private $response;
+    private CustomResponse $response;
 
-    /**
-     *
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -27,21 +21,20 @@ class CustomResponseTest extends TestCase
         $this->response = new CustomResponse();
     }
 
-
     /* TESTS */
 
     public function testClassImplementsCorrectInterface(): void
     {
         $expected = Response::class;
         $actual = $this->response;
-        $this->assertInstanceOf($expected, $actual);
+        self::assertInstanceOf($expected, $actual);
     }
 
     public function testGettingDefaultMimeType(): void
     {
         $expected = MimeType::TEXT_PlAIN;
         $actual = $this->response->getMimeType();
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testSettingMimeType(): void
@@ -50,8 +43,6 @@ class CustomResponseTest extends TestCase
 
         $expected = MimeType::TEXT_HTML;
         $actual = $this->response->getMimeType();
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
-
-    /* HELPERS */
 }

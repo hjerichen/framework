@@ -5,7 +5,6 @@ namespace HJerichen\Framework\Route;
 use HJerichen\ClassInstantiator\MethodInvoker;
 use HJerichen\Collections\MixedCollection;
 use HJerichen\Framework\IODevice\InputDevice;
-use HJerichen\Framework\IODevice\IODevice;
 use HJerichen\Framework\ObjectFactory;
 use HJerichen\Framework\Response\Exception\ResponseException;
 use HJerichen\Framework\Response\Exception\UnknownRouteException;
@@ -16,22 +15,13 @@ use HJerichen\Framework\Response\Response;
  */
 class Router
 {
-    /**
-     * @var ObjectFactory
-     */
-    private $objectFactory;
-    /**
-     * @var IODevice
-     */
-    private $inputDevice;
-    /**
-     * @var RouteInterface[]
-     */
-    private $routes = [];
+    /** @var RouteInterface[] */
+    private array $routes = [];
+    private InputDevice $inputDevice;
 
-    public function __construct(ObjectFactory $objectFactory)
-    {
-        $this->objectFactory = $objectFactory;
+    public function __construct(
+        private ObjectFactory $objectFactory
+    ) {
     }
 
 
@@ -60,8 +50,9 @@ class Router
         $request = $this->inputDevice->getRequest();
 
         foreach ($this->routes as $route) {
-            if ($routeEvaluator->evaluateRouteForRequest($route, $request))
+            if ($routeEvaluator->evaluateRouteForRequest($route, $request)) {
                 return $route;
+            }
         }
         throw new UnknownRouteException($request);
     }

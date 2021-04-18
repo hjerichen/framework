@@ -15,6 +15,7 @@ use HJerichen\Framework\Route\RouteInterface;
 use HJerichen\Framework\Route\ViewRoute;
 use HJerichen\Framework\Test\Helpers\TestController;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 
 /**
@@ -22,12 +23,11 @@ use Prophecy\Prophecy\ObjectProphecy;
  */
 class ApplicationTest extends TestCase
 {
-    /** @var Application */
-    private $application;
-    /** @var IODevice | ObjectProphecy */
-    private $ioDevice;
-    /** @var Configuration | ObjectProphecy */
-    private $configuration;
+    use ProphecyTrait;
+
+    private Application $application;
+    private ObjectProphecy|IODevice $ioDevice;
+    private ObjectProphecy|Configuration $configuration;
 
     public function setUp(): void
     {
@@ -110,7 +110,7 @@ class ApplicationTest extends TestCase
         $this->setUpInputUri('/jon');
 
         $expectedParameters = var_export(['name' => 'jon'], true);
-        $expected = new HtmlResponse("template-file: /application/tpl/test.tpl\n{$expectedParameters}");
+        $expected = new HtmlResponse("template-file: /application/tpl/test.tpl\n$expectedParameters");
         $this->assertOutputResponse($expected);
     }
 

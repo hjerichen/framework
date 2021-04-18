@@ -12,14 +12,11 @@ use HJerichen\Framework\Response\Response;
  */
 class CommandLine implements IODevice
 {
-    /**
-     * @var ArgumentParser
-     */
-    private $argumentParser;
+    private ArgumentParser $argumentParser;
 
     public function __construct()
     {
-        $this->argumentParser = new ArgumentParserPhalconCop();
+        $this->argumentParser = new ArgumentParserSimple();
     }
 
     public function getRequest(): Request
@@ -46,7 +43,8 @@ class CommandLine implements IODevice
     public function outputResponse(Response $response): void
     {
         fwrite(STDOUT, $response->getContent());
-        if ($response->getException())
+        if ($response->getException()) {
             fwrite(STDERR, $response->getException()->getMessage());
+        }
     }
 }

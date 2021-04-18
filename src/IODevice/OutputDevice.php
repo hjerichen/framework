@@ -10,5 +10,4 @@ use HJerichen\Framework\Response\Response;
 interface OutputDevice
 {
     public function outputResponse(Response $response): void;
-
 }

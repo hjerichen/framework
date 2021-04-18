@@ -7,18 +7,12 @@ namespace HJerichen\Framework\Configuration;
  */
 class ConfigurationJson implements Configuration
 {
-    /**
-     * @var string
-     */
-    private $configurationFile;
-    /**
-     * @var array<string,mixed>
-     */
-    private $configurationAsArray;
+    /** @var array<string,mixed> */
+    private array $configurationAsArray;
 
-    public function __construct(string $configurationFile)
-    {
-        $this->configurationFile = $configurationFile;
+    public function __construct(
+        private string $configurationFile
+    ) {
     }
 
     public function getTemplateEngine(): string
@@ -35,8 +29,9 @@ class ConfigurationJson implements Configuration
 
     private function loadConfigurationAsArray(): void
     {
-        if ($this->configurationAsArray === null) {
-            $this->configurationAsArray = json_decode(file_get_contents($this->configurationFile), true);
+        if (!isset($this->configurationAsArray)) {
+            $fileContent = file_get_contents($this->configurationFile);
+            $this->configurationAsArray = json_decode($fileContent, true, 512, JSON_THROW_ON_ERROR);
         }
     }
 }

@@ -10,24 +10,15 @@ use HJerichen\Framework\View\TemplateParser\TemplateParser;
  */
 class View
 {
-    /**
-     * @var Configuration
-     */
-    private $configuration;
-    /**
-     * @var TemplateParser
-     */
-    private $templateParser;
-
-    public function __construct(Configuration $configuration, TemplateParser $templateParser)
-    {
-        $this->configuration = $configuration;
-        $this->templateParser = $templateParser;
+    public function __construct(
+        private Configuration $configuration,
+        private TemplateParser $templateParser,
+    ) {
     }
 
     public function parseTemplate(string $template, array $parameters = []): string
     {
-        $templateFile = "{$this->configuration->getTemplateRootPath()}/{$template}";
+        $templateFile = "{$this->configuration->getTemplateRootPath()}/$template";
         return $this->templateParser->parseTemplate($templateFile, $parameters);
     }
 }

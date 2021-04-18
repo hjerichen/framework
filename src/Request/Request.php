@@ -9,18 +9,11 @@ use HJerichen\Collections\MixedCollection;
  */
 class Request
 {
-    /**
-     * @var string
-     */
-    private $uri;
-    /**
-     * @var MixedCollection
-     */
-    private $arguments;
+    private MixedCollection $arguments;
 
-    public function __construct(string $uri)
-    {
-        $this->uri = $uri;
+    public function __construct(
+        private string $uri
+    ) {
         $this->arguments = new MixedCollection();
     }
 

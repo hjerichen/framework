@@ -11,6 +11,5 @@ use HJerichen\Collections\Primitive\StringCollection;
 interface ArgumentParser
 {
     public function getPlainArguments(): StringCollection;
-
     public function getNamedArguments(): MixedCollection;
 }

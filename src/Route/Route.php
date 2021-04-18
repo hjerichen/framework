@@ -6,24 +6,11 @@ use HJerichen\Framework\ObjectFactory;
 
 class Route implements RouteInterface
 {
-    /**
-     * @var string
-     */
-    private $uri;
-    /**
-     * @var string
-     */
-    private $class;
-    /**
-     * @var string
-     */
-    private $method;
-
-    public function __construct(string $uri, string $class, string $method)
-    {
-        $this->uri = $uri;
-        $this->class = $class;
-        $this->method = $method;
+    public function __construct(
+        private string $uri,
+        private string $class,
+        private string $method,
+    ) {
     }
 
     public function getUri(): string

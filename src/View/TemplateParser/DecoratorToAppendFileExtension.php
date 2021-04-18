@@ -7,12 +7,9 @@ use SplFileInfo;
 
 class DecoratorToAppendFileExtension extends TemplateParser
 {
-    /** @var TemplateParser */
-    private $templateParser;
-
-    public function __construct(TemplateParser $templateParser)
-    {
-        $this->templateParser = $templateParser;
+    public function __construct(
+        private TemplateParser $templateParser
+    ) {
     }
 
     public function parseTemplate(string $templateFile, array $parameters = []): string

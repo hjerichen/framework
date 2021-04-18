@@ -18,10 +18,7 @@ class CommandLineTest extends TestCase
 {
     use PHPProphetTrait;
 
-    /**
-     * @var CommandLine
-     */
-    private $commandLine;
+    private CommandLine $commandLine;
 
     protected function setUp(): void
     {
@@ -36,14 +33,13 @@ class CommandLineTest extends TestCase
         $argv = [];
     }
 
-
     /* TESTS */
 
     public function testClassImplementsCorrectInterface(): void
     {
         $expected = IODevice::class;
         $actual = $this->commandLine;
-        $this->assertInstanceOf($expected, $actual);
+        self::assertInstanceOf($expected, $actual);
     }
 
     public function testSimpleCall(): void
@@ -97,6 +93,24 @@ class CommandLineTest extends TestCase
         $this->assertReturnsRequestWith($expectedUri, $expectedArguments);
     }
 
+    public function testCallWithArgumentsHaveEqualSign(): void
+    {
+        $this->setUpArgv(['file.php', 'test', '--name=jon', '-v', '-l=doe']);
+
+        $expectedUri = '/test';
+        $expectedArguments = new MixedCollection(['name' => 'jon', 'v' => true, 'l' => 'doe']);
+        $this->assertReturnsRequestWith($expectedUri, $expectedArguments);
+    }
+
+    public function testCallWithLongArgumentsAtLastPosition(): void
+    {
+        $this->setUpArgv(['file.php', 'test', '--hello']);
+
+        $expectedUri = '/test';
+        $expectedArguments = new MixedCollection(['hello' => true]);
+        $this->assertReturnsRequestWith($expectedUri, $expectedArguments);
+    }
+
     public function testOutputsContentToStdOut(): void
     {
         $php = $this->prophesizePHP($this->getNamespaceFoClass(CommandLine::class));
@@ -122,7 +136,6 @@ class CommandLineTest extends TestCase
         $this->commandLine->outputResponse($response);
     }
 
-
     /* HELPERS */
 
     private function setUpArgv($arguments): void
@@ -138,6 +151,6 @@ class CommandLineTest extends TestCase
         $expectedRequest = new Request($uri);
         $expectedRequest->addArguments($arguments);
         $actualRequest = $this->commandLine->getRequest();
-        $this->assertEquals($expectedRequest, $actualRequest);
+        self::assertEquals($expectedRequest, $actualRequest);
     }
 }

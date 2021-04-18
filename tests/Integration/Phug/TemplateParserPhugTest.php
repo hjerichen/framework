@@ -16,12 +16,8 @@ class TemplateParserPhugTest extends TestCase
 {
     use PHPProphetTrait;
 
-    /** @var TemplateParserPhug */
-    private $templateParser;
+    private TemplateParserPhug $templateParser;
 
-    /**
-     *
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -29,14 +25,13 @@ class TemplateParserPhugTest extends TestCase
         $this->createNewTemplateParserForTest();
     }
 
-
     /* TESTS */
 
     public function testClassImplementsCorrectInterface(): void
     {
         $expected = TemplateParser::class;
         $actual = $this->templateParser;
-        $this->assertInstanceOf($expected, $actual);
+        self::assertInstanceOf($expected, $actual);
     }
 
     public function testSimpleTemplateParsing(): void
@@ -45,7 +40,7 @@ class TemplateParserPhugTest extends TestCase
 
         $expected = '<div>simple-parsing</div>';
         $actual = $this->templateParser->parseTemplate($templateFile);
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testTemplateParsingWithParameter(): void
@@ -55,7 +50,7 @@ class TemplateParserPhugTest extends TestCase
 
         $expected = '<div>name: jon doe</div>';
         $actual = $this->templateParser->parseTemplate($templateFile, $parameters);
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testEscapingForVariableInText(): void
@@ -65,7 +60,7 @@ class TemplateParserPhugTest extends TestCase
 
         $expected = '<div>name: &lt;b&gt;jon&lt;/b&gt; doe</div>';
         $actual = $this->templateParser->parseTemplate($templateFile, $parameters);
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testWithoutEscapingForVariableInText(): void
@@ -75,7 +70,7 @@ class TemplateParserPhugTest extends TestCase
 
         $expected = '<div>name: <b>jon</b> doe</div>';
         $actual = $this->templateParser->parseTemplate($templateFile, $parameters);
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testThrowsExceptionIfNotPugFile(): void
@@ -94,12 +89,11 @@ class TemplateParserPhugTest extends TestCase
         $this->templateParser->parseTemplate($templateFile);
     }
 
-
     /* HELPERS */
 
     private function getTemplateFile(string $template): string
     {
-        return __DIR__ . "/templates/{$template}.pug";
+        return __DIR__ . "/templates/$template.pug";
     }
 
     protected function createNewTemplateParserForTest(): void

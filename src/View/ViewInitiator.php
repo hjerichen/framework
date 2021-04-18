@@ -10,19 +10,10 @@ use HJerichen\Framework\Response\Response;
  */
 class ViewInitiator
 {
-    /**
-     * @var View
-     */
-    private $view;
-    /**
-     * @var string
-     */
-    private $template;
-
-    public function __construct(View $view, string $template)
-    {
-        $this->view = $view;
-        $this->template = $template;
+    public function __construct(
+        private View $view,
+        private string $template
+    ) {
     }
 
     public function execute(): Response

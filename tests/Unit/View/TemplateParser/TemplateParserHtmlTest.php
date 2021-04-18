@@ -16,10 +16,8 @@ class TemplateParserHtmlTest extends TestCase
 {
     use PHPProphetTrait;
 
-    /** @var TemplateParserHtml */
-    private $templateParser;
-    /** @var NamespaceProphecy */
-    private $php;
+    private TemplateParserHtml $templateParser;
+    private NamespaceProphecy $php;
 
     public function setUp(): void
     {
@@ -29,9 +27,11 @@ class TemplateParserHtmlTest extends TestCase
         $this->templateParser = new TemplateParserHtml();
     }
 
+    /* TESTS */
+
     public function testClassImplementsCorrectInterface(): void
     {
-        $this->assertInstanceOf(TemplateParser::class, $this->templateParser);
+        self::assertInstanceOf(TemplateParser::class, $this->templateParser);
     }
 
     public function testCanNotParseOtherThanHtmlFile(): void
@@ -66,6 +66,6 @@ class TemplateParserHtmlTest extends TestCase
 
         $expected = 'content of html file';
         $actual = $this->templateParser->parseTemplate($templateFile);
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 }

@@ -9,14 +9,12 @@ use ReflectionClass;
  */
 class HelperDirectory
 {
-    /** @var object */
-    private $object;
-    /** @var string */
-    private $subFolder;
+    private string $subFolder;
 
-    public function __construct(object $object, string $subFolder = '')
-    {
-        $this->object = $object;
+    public function __construct(
+        private object $object,
+        string $subFolder = ''
+    ) {
         $this->subFolder = trim($subFolder);
     }
 
@@ -29,7 +27,7 @@ class HelperDirectory
     {
         $directory = $this->buildBaseDirectory();
         if ($this->subFolder !== '') {
-            $directory .= "/{$this->subFolder}";
+            $directory .= "/$this->subFolder";
         }
         return $directory;
     }

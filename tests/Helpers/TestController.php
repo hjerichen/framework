@@ -1,5 +1,6 @@
 <?php
 /** @noinspection PhpUnused */
+/** @noinspection UnknownInspectionInspection */
 /** @noinspection PhpUnusedParameterInspection */
 declare(strict_types=1);
 
@@ -15,14 +16,9 @@ use HJerichen\Framework\View\View;
  */
 class TestController
 {
-    /**
-     * @var View
-     */
-    private $view;
-
-    public function __construct(View $view)
-    {
-        $this->view = $view;
+    public function __construct(
+        private View $view
+    ) {
     }
 
     public function emptyResponse(): Response
