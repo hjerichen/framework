@@ -10,14 +10,8 @@ use HJerichen\Framework\Request\Request;
  */
 class RouteEvaluator
 {
-    /**
-     * @var Route
-     */
-    private $route;
-    /**
-     * @var Request
-     */
-    private $request;
+    private RouteInterface $route;
+    private Request $request;
 
     public function evaluateRouteForRequest(RouteInterface $route, Request $request): bool
     {
@@ -78,7 +72,7 @@ class RouteEvaluator
 
     private function isParameter(string $routePart): bool
     {
-        return strpos($routePart, '{') === 0;
+        return str_starts_with($routePart, '{');
     }
 
     private function extractParameterName(string $routePart): string

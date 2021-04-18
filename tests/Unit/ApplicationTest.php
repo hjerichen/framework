@@ -25,12 +25,9 @@ class ApplicationTest extends TestCase
 {
     use ProphecyTrait;
 
-    /** @var Application */
-    private $application;
-    /** @var IODevice | ObjectProphecy */
-    private $ioDevice;
-    /** @var Configuration | ObjectProphecy */
-    private $configuration;
+    private Application $application;
+    private ObjectProphecy|IODevice $ioDevice;
+    private ObjectProphecy|Configuration $configuration;
 
     public function setUp(): void
     {
@@ -113,7 +110,7 @@ class ApplicationTest extends TestCase
         $this->setUpInputUri('/jon');
 
         $expectedParameters = var_export(['name' => 'jon'], true);
-        $expected = new HtmlResponse("template-file: /application/tpl/test.tpl\n{$expectedParameters}");
+        $expected = new HtmlResponse("template-file: /application/tpl/test.tpl\n$expectedParameters");
         $this->assertOutputResponse($expected);
     }
 

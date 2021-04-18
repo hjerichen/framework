@@ -9,18 +9,11 @@ use HJerichen\Framework\Response\Exception\ResponseException;
  */
 abstract class Response
 {
-    /**
-     * @var string
-     */
-    private $content;
-    /**
-     * @var ResponseException
-     */
-    private $exception;
+    private ResponseException $exception;
 
-    public function __construct(string $content = '')
-    {
-        $this->content = $content;
+    public function __construct(
+        private string $content = ''
+    ) {
     }
 
     public function getContent(): string
@@ -37,11 +30,11 @@ abstract class Response
 
     public function getException(): ?ResponseException
     {
-        return $this->exception;
+        return $this->exception ?? null;
     }
 
-    public function hasException():bool
+    public function hasException(): bool
     {
-        return $this->exception !== null;
+        return isset($this->exception);
     }
 }

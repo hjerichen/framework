@@ -33,7 +33,6 @@ class CommandLineTest extends TestCase
         $argv = [];
     }
 
-
     /* TESTS */
 
     public function testClassImplementsCorrectInterface(): void
@@ -136,7 +135,6 @@ class CommandLineTest extends TestCase
 
         $this->commandLine->outputResponse($response);
     }
-
 
     /* HELPERS */
 

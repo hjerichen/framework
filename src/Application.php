@@ -15,18 +15,12 @@ use HJerichen\Framework\Route\Router;
  */
 class Application
 {
-    /**
-     * @var IODevice
-     */
-    private $ioDevice;
-    /**
-     * @var Router
-     */
-    private $router;
+    private Router $router;
 
-    public function __construct(IODevice $ioDevice, Configuration $configuration)
-    {
-        $this->ioDevice = $ioDevice;
+    public function __construct(
+        private IODevice $ioDevice,
+        Configuration $configuration
+    ) {
         $this->router = new Router(new ObjectFactory($configuration));
     }
 

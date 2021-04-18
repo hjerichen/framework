@@ -15,18 +15,10 @@ class ConfigurationJsonTest extends TestCase
 {
     use PHPProphetTrait;
 
-    /** @var ConfigurationJson */
-    private $configuration;
+    private ConfigurationJson $configuration;
+    private NamespaceProphecy $php;
+    private string $configurationFile = '/configuration.json';
 
-    /** @var string */
-    private $configurationFile = '/configuration.json';
-
-    /** @var NamespaceProphecy */
-    private $php;
-
-    /**
-     *
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -36,23 +28,22 @@ class ConfigurationJsonTest extends TestCase
         $this->configuration = new ConfigurationJson($this->configurationFile);
     }
 
-
     /* TESTS */
 
     public function testClassImplementsCorrectInterface(): void
     {
         $expected = Configuration::class;
         $actual = $this->configuration;
-        $this->assertInstanceOf($expected, $actual);
+        self::assertInstanceOf($expected, $actual);
     }
 
     public function testForDefaultTemplateEngine(): void
     {
         $this->setUpConfiguration([]);
-        
+
         $expected = 'default';
         $actual = $this->configuration->getTemplateEngine();
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testForTemplateEngine(): void
@@ -61,7 +52,7 @@ class ConfigurationJsonTest extends TestCase
 
         $expected = 'phug';
         $actual = $this->configuration->getTemplateEngine();
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testForDefaultTemplateRootPath(): void
@@ -70,7 +61,7 @@ class ConfigurationJsonTest extends TestCase
 
         $expected = '/application/tpl';
         $actual = $this->configuration->getTemplateRootPath();
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testForTemplateRootPath(): void
@@ -79,15 +70,14 @@ class ConfigurationJsonTest extends TestCase
 
         $expected = '/application/templates';
         $actual = $this->configuration->getTemplateRootPath();
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
-
 
     /* HELPERS */
 
     public function setUpConfiguration(array $configuration): void
     {
-        $configurationAsJson = json_encode($configuration);
+        $configurationAsJson = json_encode($configuration, JSON_THROW_ON_ERROR);
         $this->php->file_get_contents($this->configurationFile)->willReturn($configurationAsJson);
         $this->php->reveal();
     }

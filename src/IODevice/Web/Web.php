@@ -27,10 +27,11 @@ class Web implements IODevice
 
     public function outputResponse(Response $response): void
     {
-        if ($response->hasException())
+        if ($response->hasException()) {
             $this->outputResponseException($response->getException());
-        else
+        } else {
             $this->outputResponseContent($response);
+        }
     }
 
     private function getUri(): string
@@ -43,12 +44,11 @@ class Web implements IODevice
         $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
         $arguments = [];
 
-        if ($query)
+        if ($query) {
             parse_str($query, $arguments);
+        }
 
-        $arguments = array_map(static function($value) {
-            return $value === '' ? true : $value;
-        }, $arguments);
+        $arguments = array_map(static fn($value) => $value === '' ? true : $value, $arguments);
 
         return new MixedCollection($arguments);
     }

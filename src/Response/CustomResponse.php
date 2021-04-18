@@ -9,10 +9,7 @@ use HJerichen\Framework\Mime\MimeType;
  */
 class CustomResponse extends Response
 {
-    /**
-     * @var string
-     */
-    private $mimeType = MimeType::TEXT_PlAIN;
+    private string $mimeType = MimeType::TEXT_PlAIN;
 
     public function getMimeType(): string
     {

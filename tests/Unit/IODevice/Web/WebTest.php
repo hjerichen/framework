@@ -21,15 +21,9 @@ class WebTest extends TestCase
 {
     use PHPProphetTrait;
 
-    /** @var Web */
-    private $web;
+    private Web $web;
+    private NamespaceProphecy $php;
 
-    /** @var NamespaceProphecy */
-    private $php;
-
-    /**
-     *
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -39,14 +33,13 @@ class WebTest extends TestCase
         $this->web = new Web();
     }
 
-
     /* TESTS */
 
     public function testClassImplementsCorrectInterface(): void
     {
         $expected = IODevice::class;
         $actual = $this->web;
-        $this->assertInstanceOf($expected, $actual);
+        self::assertInstanceOf($expected, $actual);
     }
 
     public function testSimpleCall(): void
@@ -165,7 +158,6 @@ class WebTest extends TestCase
         $this->web->outputResponse($response);
     }
 
-
     /* HELPERS */
 
     private function setUpRequestUri(string $requestUri): void
@@ -180,6 +172,6 @@ class WebTest extends TestCase
         $expectedRequest = new Request($uri);
         $expectedRequest->addArguments($arguments);
         $actualRequest = $this->web->getRequest();
-        $this->assertEquals($expectedRequest, $actualRequest);
+        self::assertEquals($expectedRequest, $actualRequest);
     }
 }

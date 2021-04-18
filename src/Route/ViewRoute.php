@@ -10,19 +10,10 @@ use HJerichen\Framework\View\ViewInitiator;
  */
 class ViewRoute implements RouteInterface
 {
-    /**
-     * @var string
-     */
-    private $uri;
-    /**
-     * @var string
-     */
-    private $template;
-
-    public function __construct(string $uri, string $template)
-    {
-        $this->uri = $uri;
-        $this->template = $template;
+    public function __construct(
+        private string $uri,
+        private string $template,
+    ) {
     }
 
     public function getUri(): string

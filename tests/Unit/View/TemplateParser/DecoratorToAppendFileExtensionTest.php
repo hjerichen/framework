@@ -15,10 +15,8 @@ class DecoratorToAppendFileExtensionTest extends TestCase
 {
     use ProphecyTrait;
 
-    /** @var DecoratorToAppendFileExtension  */
-    private $decorator;
-    /** @var ObjectProphecy */
-    private $templateParser;
+    private DecoratorToAppendFileExtension $decorator;
+    private ObjectProphecy|TemplateParser $templateParser;
 
     protected function setUp(): void
     {
@@ -29,12 +27,11 @@ class DecoratorToAppendFileExtensionTest extends TestCase
         $this->decorator = new DecoratorToAppendFileExtension($this->templateParser->reveal());
     }
 
-
     /* TESTS */
 
     public function testClassImplementsCorrectInterface(): void
     {
-        $this->assertInstanceOf(TemplateParser::class, $this->decorator);
+        self::assertInstanceOf(TemplateParser::class, $this->decorator);
     }
 
     public function testDecoratorExtendsCorrectExtension(): void
@@ -46,7 +43,7 @@ class DecoratorToAppendFileExtensionTest extends TestCase
 
         $expected = 'parsed';
         $actual = $this->decorator->parseTemplate($templateFile);
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testDecoratorDoesNotExtendExtensionWhenNoFetchingFileFound(): void
@@ -58,7 +55,7 @@ class DecoratorToAppendFileExtensionTest extends TestCase
 
         $expected = 'parsed';
         $actual = $this->decorator->parseTemplate($templateFile);
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testDecoratorDoesNotExtendExtensionWhenExtensionIsAlreadyInString(): void
@@ -70,7 +67,7 @@ class DecoratorToAppendFileExtensionTest extends TestCase
 
         $expected = 'parsed';
         $actual = $this->decorator->parseTemplate($templateFile);
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testDecoratorDoesNotExtendExtensionWhenDirectoryDoesNotExist(): void
@@ -83,9 +80,6 @@ class DecoratorToAppendFileExtensionTest extends TestCase
 
         $expected = 'parsed';
         $actual = $this->decorator->parseTemplate($templateFile);
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
-
-
-    /* HELPERS */
 }

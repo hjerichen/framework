@@ -12,14 +12,8 @@ use PHPUnit\Framework\TestCase;
  */
 class JsonResponseTest extends TestCase
 {
-    /**
-     * @var JsonResponse
-     */
-    private $response;
+    private JsonResponse $response;
 
-    /**
-     *
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -27,21 +21,19 @@ class JsonResponseTest extends TestCase
         $this->response = new JsonResponse();
     }
 
-
     /* TESTS */
 
     public function testClassImplementsCorrectInterface(): void
     {
         $expected = Response::class;
         $actual = $this->response;
-        $this->assertInstanceOf($expected, $actual);
+        self::assertInstanceOf($expected, $actual);
     }
 
     public function testGettingMimeType(): void
     {
         $expected = MimeType::TEXT_JSON;
         $actual = $this->response->getMimeType();
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
-    /* HELPERS */
 }

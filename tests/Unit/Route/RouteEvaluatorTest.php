@@ -17,18 +17,9 @@ class RouteEvaluatorTest extends TestCase
 {
     use ProphecyTrait;
 
-    /**
-     * @var RouteEvaluator
-     */
-    private $routeEvaluator;
-    /**
-     * @var Request | ObjectProphecy
-     */
-    private $request;
+    private RouteEvaluator $routeEvaluator;
+    private ObjectProphecy|Request $request;
 
-    /**
-     *
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -36,7 +27,6 @@ class RouteEvaluatorTest extends TestCase
         $this->request = $this->prophesize(Request::class);
         $this->routeEvaluator = new RouteEvaluator();
     }
-
 
     /* TESTS */
 
@@ -117,13 +107,13 @@ class RouteEvaluatorTest extends TestCase
     private function assertRouteIsForUri(Route $route, string $uri): void
     {
         $this->request->getUri()->willReturn($uri);
-        $this->assertTrue($this->routeEvaluator->evaluateRouteForRequest($route, $this->request->reveal()));
+        self::assertTrue($this->routeEvaluator->evaluateRouteForRequest($route, $this->request->reveal()));
     }
 
     private function assertRouteIsNotForUri(Route $route, string $uri): void
     {
         $this->request->getUri()->willReturn($uri);
         $this->expectNoParametersSetToRequest();
-        $this->assertFalse($this->routeEvaluator->evaluateRouteForRequest($route, $this->request->reveal()));
+        self::assertFalse($this->routeEvaluator->evaluateRouteForRequest($route, $this->request->reveal()));
     }
 }

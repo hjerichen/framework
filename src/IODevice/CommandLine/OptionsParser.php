@@ -11,7 +11,7 @@ class OptionsParser
     private array $parsedOptions = [];
 
     /**
-     * @param  string[] $argv
+     * @param string[] $argv
      * @return string[]
      */
     public function parse(array $argv = []): array
@@ -73,13 +73,16 @@ class OptionsParser
         $equalPosition = strpos($option, '=');
         if ($equalPosition === false) return false;
 
-        $this->parsedOptions = array_merge($this->parsedOptions, $this->getOptionWithEqualSign($option, $equalPosition));
+        $this->parsedOptions = array_merge(
+            $this->parsedOptions,
+            $this->getOptionWithEqualSign($option, $equalPosition)
+        );
         return true;
     }
 
     /**
      * @param string $argument
-     * @param int    $equalPosition
+     * @param int $equalPosition
      * @return array<string,string>
      */
     private function getOptionWithEqualSign(string $argument, int $equalPosition): array

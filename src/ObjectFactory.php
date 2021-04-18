@@ -17,31 +17,20 @@ use HJerichen\Framework\View\TemplateParser\TemplateParserSmart;
  */
 class ObjectFactory extends ClassInstantiator
 {
-    /**
-     * @var Configuration
-     */
-    private $configuration;
-
-    public function __construct(Configuration $configuration)
-    {
+    public function __construct(
+        private Configuration $configuration
+    ) {
         parent::__construct();
-        $this->configuration = $configuration;
     }
 
     /** @noinspection PhpFullyQualifiedNameUsageInspection */
     public function createTemplateParser(): TemplateParser
     {
-        switch ($this->configuration->getTemplateEngine()) {
-            case 'simple-output':
-                $templateParser = new TemplateParserSimpleOutput();
-                break;
-            case 'phug':
-                $templateParser = new TemplateParserPhug(new \Phug\Renderer());
-                break;
-            default:
-                $templateParser = $this->createSmartTemplateParser();
-                break;
-        }
+        $templateParser = match ($this->configuration->getTemplateEngine()) {
+            'simple-output' => new TemplateParserSimpleOutput(),
+            'phug' => new TemplateParserPhug(new \Phug\Renderer()),
+            default => $this->createSmartTemplateParser(),
+        };
         return new DecoratorToAppendFileExtension($templateParser);
     }
 

@@ -26,12 +26,9 @@ class ObjectFactoryTest extends TestCase
     use PHPProphetTrait;
     use ProphecyTrait;
 
-    /** @var ObjectFactory */
-    private $objectFactory;
-    /** @var Configuration | ObjectProphecy */
-    private $configuration;
-    /** @var NamespaceProphecy */
-    private $php;
+    private ObjectFactory $objectFactory;
+    private NamespaceProphecy $php;
+    private ObjectProphecy|Configuration $configuration;
 
     protected function setUp(): void
     {
@@ -43,14 +40,13 @@ class ObjectFactoryTest extends TestCase
         $this->createNewObjectFactoryForTest();
     }
 
-
     /* TESTS */
 
     public function testClassHasCorrectInterface(): void
     {
         $expected = ClassInstantiator::class;
         $actual = $this->objectFactory;
-        $this->assertInstanceOf($expected, $actual);
+        self::assertInstanceOf($expected, $actual);
     }
 
     public function testCreateDefaultTemplateParserInclusivePhug(): void
@@ -69,7 +65,7 @@ class ObjectFactoryTest extends TestCase
         $expected = new TemplateParserSmart($expectedCollection);
         $expected = new DecoratorToAppendFileExtension($expected);
         $actual = $this->objectFactory->createTemplateParser();
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testCreateDefaultTemplateParserWithoutPhug(): void
@@ -87,7 +83,7 @@ class ObjectFactoryTest extends TestCase
         $expected = new TemplateParserSmart($expectedCollection);
         $expected = new DecoratorToAppendFileExtension($expected);
         $actual = $this->objectFactory->createTemplateParser();
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testCreateSimpleOutputTemplateParser(): void
@@ -97,7 +93,7 @@ class ObjectFactoryTest extends TestCase
         $expected = new TemplateParserSimpleOutput();
         $expected = new DecoratorToAppendFileExtension($expected);
         $actual = $this->objectFactory->createTemplateParser();
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testCreatePhugTemplateParser(): void
@@ -109,9 +105,8 @@ class ObjectFactoryTest extends TestCase
         $expected = new TemplateParserPhug(new Renderer());
         $expected = new DecoratorToAppendFileExtension($expected);
         $actual = $this->objectFactory->createTemplateParser();
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
-
 
     /* HELPERS */
 

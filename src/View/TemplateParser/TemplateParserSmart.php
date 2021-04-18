@@ -9,15 +9,11 @@ use HJerichen\Framework\View\Exception\TemplateParserException;
  */
 class TemplateParserSmart extends TemplateParser
 {
-    /** @var TemplateParserCollection  */
-    private $templateParsers;
+    private array $parameters;
 
-    /** @var array */
-    private $parameters;
-
-    public function __construct(TemplateParserCollection $templateParserCollection)
-    {
-        $this->templateParsers = $templateParserCollection;
+    public function __construct(
+        private TemplateParserCollection $templateParsers
+    ) {
     }
 
     public function parseTemplate(string $templateFile, array $parameters = []): string

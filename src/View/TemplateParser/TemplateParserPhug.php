@@ -9,15 +9,11 @@ use Phug\Renderer;
  */
 class TemplateParserPhug extends TemplateParser
 {
-    /** @var Renderer */
-    private $renderer;
+    private array $parameters;
 
-    /** @var array */
-    private $parameters;
-
-    public function __construct(Renderer $renderer)
-    {
-        $this->renderer = $renderer;
+    public function __construct(
+        private Renderer $renderer
+    ) {
     }
 
     public function parseTemplate(string $templateFile, array $parameters = []): string

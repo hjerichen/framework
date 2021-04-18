@@ -24,14 +24,9 @@ class ApplicationTest extends TestCase
     use PHPProphetTrait;
     use ProphecyTrait;
 
-    /** @var Application */
-    private $application;
-
-    /** @var IODevice | ObjectProphecy */
-    private $ioDevice;
-
-    /** @var Configuration | ObjectProphecy */
-    private $configuration;
+    private Application $application;
+    private ObjectProphecy|IODevice $ioDevice;
+    private ObjectProphecy|Configuration $configuration;
 
     public function setUp(): void
     {

@@ -10,15 +10,14 @@ use SplFileInfo;
  */
 abstract class TemplateParser
 {
-    /** @var string */
-    protected $templateFile;
+    protected string $templateFile;
 
     abstract public function parseTemplate(string $templateFile, array $parameters = []): string;
 
     protected function throwExceptionIfNotFileWithExtension(string $extension): void
     {
         if ($this->getExtensionOfTemplateFile() !== $extension) {
-            $message = "Template file not supported: {$this->templateFile}";
+            $message = "Template file not supported: $this->templateFile";
             throw new TemplateParserException($message);
         }
     }
@@ -26,7 +25,7 @@ abstract class TemplateParser
     protected function throwExceptionIfFileNotFound(): void
     {
         if (!file_exists($this->templateFile)) {
-            $message = "Template file not found: {$this->templateFile}";
+            $message = "Template file not found: $this->templateFile";
             throw new TemplateParserException($message);
         }
     }

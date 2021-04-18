@@ -17,20 +17,11 @@ class TemplateParserSmartTest extends TestCase
     use PHPProphetTrait;
     use ProphecyTrait;
 
-    /** @var TemplateParserSmart */
-    private $templateParserSmart;
-
-    /** @var TemplateParserCollection */
-    private $templateParserCollection;
-
-    /** @var TemplateParser | ObjectProphecy */
-    private $templateParser1;
-
-    /** @var TemplateParser | ObjectProphecy */
-    private $templateParser2;
-
-    /** @var NamespaceProphecy */
-    private $php;
+    private NamespaceProphecy $php;
+    private TemplateParserSmart $templateParserSmart;
+    private TemplateParserCollection $templateParserCollection;
+    private ObjectProphecy|TemplateParser $templateParser1;
+    private ObjectProphecy|TemplateParser $templateParser2;
 
     protected function setUp(): void
     {
@@ -47,12 +38,11 @@ class TemplateParserSmartTest extends TestCase
         $this->templateParserSmart = new TemplateParserSmart($this->templateParserCollection);
     }
 
-
     /* TESTS */
 
     public function testClassImplementsCorrectInterface(): void
     {
-        $this->assertInstanceOf(TemplateParser::class, $this->templateParserSmart);
+        self::assertInstanceOf(TemplateParser::class, $this->templateParserSmart);
     }
 
     public function testThrowsExceptionIfFileDoesNotExist(): void
@@ -91,9 +81,8 @@ class TemplateParserSmartTest extends TestCase
 
         $expected = 'parsed';
         $actual = $this->templateParserSmart->parseTemplate($templateFile);
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
-
 
     /* HELPERS */
 

@@ -11,21 +11,14 @@ use PHPUnit\Framework\TestCase;
  */
 class RequestTest extends TestCase
 {
-    /**
-     * @var Request
-     */
-    private $request;
+    private Request $request;
 
-    /**
-     *
-     */
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->request = new Request('/');
     }
-
 
     /* TESTS */
 
@@ -42,9 +35,6 @@ class RequestTest extends TestCase
         $expected['test4'] = 'value4';
         $expected['test5'] = 'value5';
         $actual = $this->request->getArguments();
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
-
-
-    /* HELPERS */
 }

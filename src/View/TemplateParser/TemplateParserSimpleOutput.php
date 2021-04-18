@@ -16,7 +16,7 @@ class TemplateParserSimpleOutput extends TemplateParser
 
     private function getOutputForTemplateFile(string $templateFile): string
     {
-        return "template-file: {$templateFile}.tpl";
+        return "template-file: $templateFile.tpl";
     }
 
     private function appendParametersToOutput(string $output, array $parameters): string
@@ -24,6 +24,6 @@ class TemplateParserSimpleOutput extends TemplateParser
         if (count($parameters) === 0) return $output;
 
         $parametersAsString = var_export($parameters, true);
-        return $output . "\n{$parametersAsString}";
+        return $output . "\n$parametersAsString";
     }
 }

@@ -12,14 +12,8 @@ use PHPUnit\Framework\TestCase;
  */
 class TextResponseTest extends TestCase
 {
-    /**
-     * @var TextResponse
-     */
-    private $response;
+    private TextResponse $response;
 
-    /**
-     *
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -27,21 +21,20 @@ class TextResponseTest extends TestCase
         $this->response = new TextResponse();
     }
 
-
     /* TESTS */
 
     public function testClassImplementsCorrectInterface(): void
     {
         $expected = Response::class;
         $actual = $this->response;
-        $this->assertInstanceOf($expected, $actual);
+        self::assertInstanceOf($expected, $actual);
     }
 
     public function testGettingMimeType(): void
     {
         $expected = MimeType::TEXT_PlAIN;
         $actual = $this->response->getMimeType();
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     /* HELPERS */
