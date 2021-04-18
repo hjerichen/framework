@@ -12,10 +12,7 @@ use HJerichen\Framework\Response\Response;
  */
 class CommandLine implements IODevice
 {
-    /**
-     * @var ArgumentParser
-     */
-    private $argumentParser;
+    private ArgumentParser $argumentParser;
 
     public function __construct()
     {
