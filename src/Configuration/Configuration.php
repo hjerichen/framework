@@ -9,4 +9,5 @@ interface Configuration
 {
     public function getTemplateEngine(): string;
     public function getTemplateRootPath(): string;
+    public function getCustomValue(string $key): string|null;
 }

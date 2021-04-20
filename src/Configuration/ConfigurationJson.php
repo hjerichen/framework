@@ -27,6 +27,12 @@ class ConfigurationJson implements Configuration
         return $this->configurationAsArray['template-root-path'] ?? '/application/tpl';
     }
 
+    public function getCustomValue(string $key): string|null
+    {
+        $this->loadConfigurationAsArray();
+        return $this->configurationAsArray[$key] ?? null;
+    }
+
     private function loadConfigurationAsArray(): void
     {
         if (!isset($this->configurationAsArray)) {
