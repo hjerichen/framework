@@ -12,7 +12,8 @@ class Request
     private MixedCollection $arguments;
 
     public function __construct(
-        private string $uri
+        private string $uri,
+        private string $body = ''
     ) {
         $this->arguments = new MixedCollection();
     }
@@ -35,5 +36,10 @@ class Request
     public function addArguments(MixedCollection $arguments): void
     {
         $this->arguments->merge($arguments);
+    }
+
+    public function getBody(): string
+    {
+        return $this->body;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace HJerichen\Framework\Test\Library;
 
+use HJerichen\Framework\IODevice\Web\Web;
 use HJerichen\Framework\ObjectFactory;
 use HJerichen\Framework\View\TemplateParser\TemplateParser;
 use HJerichen\ProphecyPHP\PHPProphetTrait;
@@ -38,5 +39,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
 
         $php = $this->prophesizePHP($this->getNamespaceFoClass(TemplateParser::class));
         $php->prepare('file_get_contents', 'file_exists');
+
+        $php = $this->prophesizePHP($this->getNamespaceFoClass(Web::class));
+        $php->prepare('file_get_contents');
     }
 }

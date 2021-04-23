@@ -102,6 +102,14 @@ class WebTest extends TestCase
         $this->assertReturnsRequestWith($expectedUri, $expectedArguments);
     }
 
+    public function testCallWithBody(): void
+    {
+        $this->setUpRequestUri('/test');
+        $this->setUpBody('some body');
+
+        $this->assertReturnsRequestWith(uri: '/test', body: 'some body');
+    }
+
     /** @noinspection PhpUndefinedMethodInspection */
     public function testOutputsContent(): void
     {
@@ -165,11 +173,17 @@ class WebTest extends TestCase
         $_SERVER['REQUEST_URI'] = $requestUri;
     }
 
-    private function assertReturnsRequestWith(string $uri, ?MixedCollection $arguments = null): void
+    private function setUpBody(string $body): void
+    {
+        $this->php->file_get_contents('php://input')->willReturn($body);
+        $this->php->reveal();
+    }
+
+    private function assertReturnsRequestWith(string $uri, ?MixedCollection $arguments = null, string $body = ''): void
     {
         $arguments = $arguments ?? new MixedCollection();
 
-        $expectedRequest = new Request($uri);
+        $expectedRequest = new Request($uri, $body);
         $expectedRequest->addArguments($arguments);
         $actualRequest = $this->web->getRequest();
         self::assertEquals($expectedRequest, $actualRequest);

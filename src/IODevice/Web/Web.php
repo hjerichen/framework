@@ -18,9 +18,10 @@ class Web implements IODevice
     public function getRequest(): Request
     {
         $uri = $this->getUri();
+        $body = $this->getBody();
         $arguments = $this->getArguments();
 
-        $response = new Request($uri);
+        $response = new Request($uri, $body);
         $response->addArguments($arguments);
         return $response;
     }
@@ -51,6 +52,11 @@ class Web implements IODevice
         $arguments = array_map(static fn($value) => $value === '' ? true : $value, $arguments);
 
         return new MixedCollection($arguments);
+    }
+
+    private function getBody(): string
+    {
+        return file_get_contents('php://input') ?: '';
     }
 
     private function outputResponseException(ResponseException $exception): void

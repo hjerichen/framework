@@ -37,4 +37,20 @@ class RequestTest extends TestCase
         $actual = $this->request->getArguments();
         self::assertEquals($expected, $actual);
     }
+
+    public function testGetBodyDefault(): void
+    {
+        $expected = '';
+        $actual = $this->request->getBody();
+        self::assertEquals($expected, $actual);
+    }
+
+    public function testGetBody(): void
+    {
+        $this->request = new Request('/jon', 'test');
+
+        $expected = 'test';
+        $actual = $this->request->getBody();
+        self::assertEquals($expected, $actual);
+    }
 }
