@@ -70,6 +70,8 @@ class Router
     private function getPredefinedArgumentsForControllerMethod(): MixedCollection
     {
         $request = $this->inputDevice->getRequest();
-        return $request->getArguments();
+        $arguments = $request->getArguments();
+        $arguments['request'] = $request;
+        return $arguments;
     }
 }

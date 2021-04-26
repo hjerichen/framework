@@ -93,6 +93,16 @@ class ApplicationTest extends TestCase
         $this->assertOutputResponse($expected);
     }
 
+    public function testControllerHasAccessToRequestObject(): void
+    {
+        $route = new Route('/test/{id}', TestController::class, 'testGetsRequest');
+        $this->setUpRoute($route);
+        $this->setUpInputUri('/test/44');
+
+        $expected = new HtmlResponse('success - 44');
+        $this->assertOutputResponse($expected);
+    }
+
     public function testTemplateParsing(): void
     {
         $route = new Route('/', TestController::class, 'testTemplateParsing');
