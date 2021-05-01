@@ -18,7 +18,7 @@ use HJerichen\Framework\View\TemplateParser\TemplateParserSmart;
 class ObjectFactory extends ClassInstantiator
 {
     public function __construct(
-        private Configuration $configuration
+        protected Configuration $configuration
     ) {
         parent::__construct();
     }
