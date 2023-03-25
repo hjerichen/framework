@@ -18,6 +18,7 @@
 		<RedundantPropertyInitializationCheck errorLevel="suppress"/>
 		<PropertyNotSetInConstructor errorLevel="suppress"/>
 		<MissingConstructor errorLevel="suppress"/>
+		<InvalidDocblock errorLevel="suppress"/>
 	</issueHandlers>
 	<plugins>
 		<pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>

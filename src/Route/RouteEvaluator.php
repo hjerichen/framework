@@ -36,9 +36,11 @@ class RouteEvaluator
             return false;
 
         for ($i = 0; $i < $uriPartsFromRouteCount; $i++) {
-            if ($this->isParameter($uriPartsFromRoute[$i]))
+            $requestPart = $uriPartsFromRequest->offsetGet($i);
+            $routePart = $uriPartsFromRoute->offsetGet($i) ?? '';
+            if ($this->isParameter($routePart))
                 continue;
-            if ($uriPartsFromRoute[$i] !== $uriPartsFromRequest[$i])
+            if ($routePart !== $requestPart)
                 return false;
         }
         return true;
@@ -51,9 +53,11 @@ class RouteEvaluator
         $uriPartsFromRouteCount = count($uriPartsFromRoute);
 
         for ($i = 0; $i < $uriPartsFromRouteCount; $i++) {
-            if ($this->isParameter($uriPartsFromRoute[$i])) {
-                $parameterName = $this->extractParameterName($uriPartsFromRoute[$i]);
-                $this->request->addArgument($parameterName, $uriPartsFromRequest[$i]);
+            $requestPart = $uriPartsFromRequest->offsetGet($i);
+            $routePart = $uriPartsFromRoute->offsetGet($i) ?? '';
+            if ($this->isParameter($routePart)) {
+                $parameterName = $this->extractParameterName($routePart);
+                $this->request->addArgument($parameterName, $requestPart);
             }
         }
     }

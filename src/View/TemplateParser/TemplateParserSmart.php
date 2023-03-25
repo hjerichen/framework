@@ -3,6 +3,7 @@
 namespace HJerichen\Framework\View\TemplateParser;
 
 use HJerichen\Framework\View\Exception\TemplateParserException;
+use RuntimeException;
 
 /**
  * @author Heiko Jerichen <heiko@jerichen.de>
@@ -28,7 +29,7 @@ class TemplateParserSmart extends TemplateParser
 
     private function parseTemplateFromCollection(): string
     {
-        $lastException = null;
+        $lastException = new RuntimeException('No valid template parser set.');
 
         foreach ($this->templateParsers as $templateParser) {
             try {
