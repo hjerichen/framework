@@ -15,6 +15,8 @@
 		</ignoreFiles>
 	</projectFiles>
 	<issueHandlers>
+		<RedundantPropertyInitializationCheck errorLevel="suppress"/>
+		<PropertyNotSetInConstructor errorLevel="suppress"/>
 		<MissingConstructor errorLevel="suppress"/>
 	</issueHandlers>
 	<plugins>

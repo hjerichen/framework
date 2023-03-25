@@ -18,16 +18,16 @@ class ConfigurationJson implements Configuration
     public function getTemplateEngine(): string
     {
         $this->loadConfigurationAsArray();
-        return $this->configurationAsArray['template-engine'] ?? 'default';
+        return (string)($this->configurationAsArray['template-engine'] ?? 'default');
     }
 
     public function getTemplateRootPath(): string
     {
         $this->loadConfigurationAsArray();
-        return $this->configurationAsArray['template-root-path'] ?? '/application/tpl';
+        return (string)($this->configurationAsArray['template-root-path'] ?? '/application/tpl');
     }
 
-    public function getCustomValue(string $key): string|null
+    public function getCustomValue(string $key): mixed
     {
         $this->loadConfigurationAsArray();
         return $this->configurationAsArray[$key] ?? null;
@@ -37,6 +37,7 @@ class ConfigurationJson implements Configuration
     {
         if (!isset($this->configurationAsArray)) {
             $fileContent = file_get_contents($this->configurationFile);
+            /** @psalm-suppress MixedAssignment */
             $this->configurationAsArray = json_decode($fileContent, true, 512, JSON_THROW_ON_ERROR);
         }
     }

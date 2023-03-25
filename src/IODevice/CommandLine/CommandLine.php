@@ -43,8 +43,8 @@ class CommandLine implements IODevice
     public function outputResponse(Response $response): void
     {
         fwrite(STDOUT, $response->getContent());
-        if ($response->getException()) {
-            fwrite(STDERR, $response->getException()->getMessage());
-        }
+
+        $exception = $response->getException();
+        if ($exception) fwrite(STDERR, $exception->getMessage());
     }
 }

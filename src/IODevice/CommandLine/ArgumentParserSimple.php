@@ -33,9 +33,13 @@ class ArgumentParserSimple implements ArgumentParser
         return new MixedCollection($arguments);
     }
 
+    /**
+     * @param string[] $arguments
+     * @return string[]
+     */
     private function extractPlainArguments(array $arguments): array
     {
-        return array_filter($arguments, static fn($key) => is_int($key), ARRAY_FILTER_USE_KEY);
+        return array_filter($arguments, static fn(mixed $key) => is_int($key), ARRAY_FILTER_USE_KEY);
     }
 
     private function extractNamedArguments(array $arguments): array
