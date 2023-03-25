@@ -4,8 +4,12 @@ namespace HJerichen\Framework\Route;
 
 use HJerichen\Framework\ObjectFactory;
 
+/** @template T */
 class Route implements RouteInterface
 {
+    /**
+     * @param class-string<T> $class
+     */
     public function __construct(
         private readonly string $uri,
         private readonly string $class,

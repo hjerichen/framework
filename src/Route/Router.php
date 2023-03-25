@@ -5,10 +5,12 @@ namespace HJerichen\Framework\Route;
 use HJerichen\ClassInstantiator\MethodInvoker;
 use HJerichen\Collections\MixedCollection;
 use HJerichen\Framework\IODevice\InputDevice;
+use HJerichen\Framework\IODevice\Web\Web;
 use HJerichen\Framework\ObjectFactory;
 use HJerichen\Framework\Response\Exception\ResponseException;
 use HJerichen\Framework\Response\Exception\UnknownRouteException;
 use HJerichen\Framework\Response\Response;
+use TypeError;
 
 /**
  * @author Heiko Jerichen <heiko@jerichen.de>
@@ -20,8 +22,9 @@ class Router
     private InputDevice $inputDevice;
 
     public function __construct(
-        private ObjectFactory $objectFactory
+        private readonly ObjectFactory $objectFactory
     ) {
+        $this->inputDevice = new Web();
     }
 
 
@@ -64,7 +67,12 @@ class Router
         $controller = $route->getInstantiatedClass($this->objectFactory);
         $callable = [$controller, $route->getMethod()];
         $predefinedArguments = $this->getPredefinedArgumentsForControllerMethod();
-        return $methodInvoker->invokeMethod($callable, $predefinedArguments->asArray());
+
+        /** @psalm-suppress MixedAssignment */
+        $response = $methodInvoker->invokeMethod($callable, $predefinedArguments->asArray());
+        if ($response instanceof Response) return $response;
+
+        throw new TypeError('Controller method needs to return a Response object');
     }
 
     private function getPredefinedArgumentsForControllerMethod(): MixedCollection

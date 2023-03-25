@@ -18,7 +18,7 @@ use HJerichen\Framework\View\View;
 class TestController
 {
     public function __construct(
-        private View $view
+        private readonly View $view
     ) {
     }
 
@@ -54,5 +54,10 @@ class TestController
         $parameters = ['name' => $name];
         $content = $this->view->parseTemplate('test', $parameters);
         return new HtmlResponse($content);
+    }
+
+    public function wrongResponse(): string
+    {
+        return '';
     }
 }
