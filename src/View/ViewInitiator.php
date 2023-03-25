@@ -11,8 +11,8 @@ use HJerichen\Framework\Response\Response;
 class ViewInitiator
 {
     public function __construct(
-        private View $view,
-        private string $template
+        private readonly View $view,
+        private readonly string $template
     ) {
     }
 

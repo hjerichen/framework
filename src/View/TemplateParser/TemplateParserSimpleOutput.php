@@ -10,8 +10,7 @@ class TemplateParserSimpleOutput extends TemplateParser
     public function parseTemplate(string $templateFile, array $parameters = []): string
     {
         $output = $this->getOutputForTemplateFile($templateFile);
-        $output = $this->appendParametersToOutput($output, $parameters);
-        return $output;
+        return $this->appendParametersToOutput($output, $parameters);
     }
 
     private function getOutputForTemplateFile(string $templateFile): string

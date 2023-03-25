@@ -11,7 +11,7 @@ class ConfigurationJson implements Configuration
     private array $configurationAsArray;
 
     public function __construct(
-        private string $configurationFile
+        private readonly string $configurationFile
     ) {
     }
 

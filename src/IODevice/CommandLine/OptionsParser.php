@@ -7,7 +7,7 @@ namespace HJerichen\Framework\IODevice\CommandLine;
  */
 class OptionsParser
 {
-    /** @var string[] */
+    /** @var array<string,string|bool> */
     private array $parsedOptions = [];
 
     /**

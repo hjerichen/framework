@@ -11,8 +11,8 @@ use HJerichen\Framework\View\TemplateParser\TemplateParser;
 class View
 {
     public function __construct(
-        private Configuration $configuration,
-        private TemplateParser $templateParser,
+        private readonly Configuration $configuration,
+        private readonly TemplateParser $templateParser,
     ) {
     }
 

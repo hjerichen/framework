@@ -12,8 +12,8 @@ class Request
     private MixedCollection $arguments;
 
     public function __construct(
-        private string $uri,
-        private string $body = ''
+        private readonly string $uri,
+        private readonly string $body = ''
     ) {
         $this->arguments = new MixedCollection();
     }

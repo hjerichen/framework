@@ -12,7 +12,7 @@ abstract class Response
     private ResponseException $exception;
 
     public function __construct(
-        private string $content = ''
+        private readonly string $content = ''
     ) {
     }
 

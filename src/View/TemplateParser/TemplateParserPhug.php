@@ -12,7 +12,7 @@ class TemplateParserPhug extends TemplateParser
     private array $parameters;
 
     public function __construct(
-        private Renderer $renderer
+        private readonly Renderer $renderer
     ) {
     }
 

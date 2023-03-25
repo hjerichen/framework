@@ -7,9 +7,9 @@ use HJerichen\Framework\ObjectFactory;
 class Route implements RouteInterface
 {
     public function __construct(
-        private string $uri,
-        private string $class,
-        private string $method,
+        private readonly string $uri,
+        private readonly string $class,
+        private readonly string $method,
     ) {
     }
 

@@ -11,8 +11,8 @@ use HJerichen\Framework\View\ViewInitiator;
 class ViewRoute implements RouteInterface
 {
     public function __construct(
-        private string $uri,
-        private string $template,
+        private readonly string $uri,
+        private readonly string $template,
     ) {
     }
 

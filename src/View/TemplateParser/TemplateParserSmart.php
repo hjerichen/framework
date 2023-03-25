@@ -12,7 +12,7 @@ class TemplateParserSmart extends TemplateParser
     private array $parameters;
 
     public function __construct(
-        private TemplateParserCollection $templateParsers
+        private readonly TemplateParserCollection $templateParsers
     ) {
     }
 

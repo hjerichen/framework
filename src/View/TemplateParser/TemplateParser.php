@@ -32,7 +32,6 @@ abstract class TemplateParser
 
     private function getExtensionOfTemplateFile(): string
     {
-        $file = new SplFileInfo($this->templateFile);
-        return $file->getExtension();
+        return (new SplFileInfo($this->templateFile))->getExtension();
     }
 }
