@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+/** @noinspection PhpRedundantOptionalArgumentInspection */
+declare(strict_types=1);
 
 namespace HJerichen\Framework\Test\Unit\View\TemplateParser;
 
@@ -16,7 +18,8 @@ class DecoratorToAppendFileExtensionTest extends TestCase
     use ProphecyTrait;
 
     private DecoratorToAppendFileExtension $decorator;
-    private ObjectProphecy|TemplateParser $templateParser;
+    /** @var ObjectProphecy<TemplateParser> */
+    private ObjectProphecy $templateParser;
 
     protected function setUp(): void
     {

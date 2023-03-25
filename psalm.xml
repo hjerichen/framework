@@ -12,6 +12,7 @@
 		<directory name="tests"/>
 		<ignoreFiles>
 			<directory name="vendor/phpunit"/>
+			<directory name="vendor/hjerichen/prophecy-php"/>
 		</ignoreFiles>
 	</projectFiles>
 	<issueHandlers>

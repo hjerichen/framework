@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+/** @noinspection PhpRedundantOptionalArgumentInspection */
+declare(strict_types=1);
 
 namespace HJerichen\Framework\Test\Unit\View\TemplateParser;
 
@@ -20,8 +22,10 @@ class TemplateParserSmartTest extends TestCase
     private NamespaceProphecy $php;
     private TemplateParserSmart $templateParserSmart;
     private TemplateParserCollection $templateParserCollection;
-    private ObjectProphecy|TemplateParser $templateParser1;
-    private ObjectProphecy|TemplateParser $templateParser2;
+    /** @var ObjectProphecy<TemplateParser>  */
+    private ObjectProphecy $templateParser1;
+    /** @var ObjectProphecy<TemplateParser>  */
+    private ObjectProphecy $templateParser2;
 
     protected function setUp(): void
     {
