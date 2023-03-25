@@ -34,12 +34,13 @@ class ArgumentParserSimple implements ArgumentParser
     }
 
     /**
-     * @param string[] $arguments
+     * @param array<array-key,string|bool|null> $arguments
      * @return string[]
      */
     private function extractPlainArguments(array $arguments): array
     {
-        return array_filter($arguments, static fn(mixed $key) => is_int($key), ARRAY_FILTER_USE_KEY);
+        $plainArguments = array_filter($arguments, static fn(mixed $key) => is_int($key), ARRAY_FILTER_USE_KEY);
+        return array_filter($plainArguments, 'is_string');
     }
 
     private function extractNamedArguments(array $arguments): array

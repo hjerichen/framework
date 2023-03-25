@@ -28,8 +28,9 @@ class Web implements IODevice
 
     public function outputResponse(Response $response): void
     {
-        if ($response->hasException()) {
-            $this->outputResponseException($response->getException());
+        $exception = $response->getException();
+        if ($exception) {
+            $this->outputResponseException($exception);
         } else {
             $this->outputResponseContent($response);
         }
@@ -37,12 +38,12 @@ class Web implements IODevice
 
     private function getUri(): string
     {
-        return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        return parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
     }
 
     private function getArguments(): MixedCollection
     {
-        $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+        $query = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_QUERY);
         $arguments = [];
 
         if ($query) {

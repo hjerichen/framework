@@ -28,7 +28,7 @@ class Request
         return $this->arguments;
     }
 
-    public function addArgument(string $name, $value): void
+    public function addArgument(string $name, mixed $value): void
     {
         $this->arguments[$name] = $value;
     }

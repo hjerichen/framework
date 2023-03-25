@@ -7,12 +7,12 @@ namespace HJerichen\Framework\IODevice\CommandLine;
  */
 class OptionsParser
 {
-    /** @var array<string,string|bool> */
+    /** @var array<array-key,string|bool|null> */
     private array $parsedOptions = [];
 
     /**
      * @param string[] $argv
-     * @return string[]
+     * @return array<array-key,string|bool|null>
      */
     public function parse(array $argv = []): array
     {
@@ -23,13 +23,14 @@ class OptionsParser
         return $this->parsedOptions;
     }
 
+    /** @param string[] $argv */
     private function parseOptions(array $argv): void
     {
         $argumentCount = count($argv);
 
         /** @noinspection ForeachInvariantsInspection */
         for ($i = 0; $i < $argumentCount; $i++) {
-            $argument = $argv[$i];
+            $argument = $argv[$i] ?? '';
             $argumentNext = $argv[$i + 1] ?? null;
 
             if (str_starts_with($argument, '--')) {
@@ -55,6 +56,7 @@ class OptionsParser
                 // -a value1 / -abc value2 / -abc
                 $hasNextElementDash = !($argumentNext !== null && $argumentNext[0] !== '-');
                 foreach (str_split(substr($argument, 1)) as $char) {
+                    /** @psalm-suppress InvalidPropertyAssignmentValue */
                     $this->parsedOptions[$char] = $hasNextElementDash ? true : $argumentNext;
                 }
 
@@ -91,9 +93,7 @@ class OptionsParser
         $value = substr($argument, $equalPosition + 1);
 
         $name = $this->stripHyphens($name);
-        $option[$name] = $value;
-
-        return $option;
+        return [$name => $value];
     }
 
     private function stripHyphens(string $argument): string

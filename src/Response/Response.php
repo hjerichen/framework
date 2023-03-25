@@ -32,9 +32,4 @@ abstract class Response
     {
         return $this->exception ?? null;
     }
-
-    public function hasException(): bool
-    {
-        return isset($this->exception);
-    }
 }
