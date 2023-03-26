@@ -12,7 +12,7 @@ class HelperDirectory
     private string $subFolder;
 
     public function __construct(
-        private object $object,
+        private readonly object $object,
         string $subFolder = ''
     ) {
         $this->subFolder = trim($subFolder);

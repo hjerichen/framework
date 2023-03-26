@@ -138,7 +138,8 @@ class CommandLineTest extends TestCase
 
     /* HELPERS */
 
-    private function setUpArgv($arguments): void
+    /** @param string[] $arguments */
+    private function setUpArgv(array $arguments): void
     {
         global $argv;
         $argv = $arguments;

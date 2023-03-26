@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+/** @noinspection PhpVoidFunctionResultUsedInspection */
+declare(strict_types=1);
 
 namespace HJerichen\Framework\Test\Unit\Route;
 
@@ -18,7 +20,8 @@ class RouteEvaluatorTest extends TestCase
     use ProphecyTrait;
 
     private RouteEvaluator $routeEvaluator;
-    private ObjectProphecy|Request $request;
+    /** @var ObjectProphecy<Request> */
+    private ObjectProphecy $request;
 
     protected function setUp(): void
     {
@@ -92,8 +95,10 @@ class RouteEvaluatorTest extends TestCase
         return $route->reveal();
     }
 
+    /** @param array<string,mixed> $parameters */
     private function expectParametersSetToRequest(array $parameters): void
     {
+        /** @var mixed $value */
         foreach ($parameters as $name => $value) {
             $this->request->addArgument($name, $value)->shouldBeCalledOnce();
         }

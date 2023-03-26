@@ -23,6 +23,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $this->preparePHPFunctions();
     }
 
+    /** @param class-string $class */
     protected function getNamespaceFoClass(string $class): string
     {
         $reflection = new ReflectionClass($class);

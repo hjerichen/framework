@@ -6,7 +6,7 @@ use HJerichen\Framework\Configuration\Configuration;
 use HJerichen\Framework\View\TemplateParser\TemplateParser;
 
 /**
- * @author Heiko Jerichen <heiko@jerichen.de>
+ * @author Heiko Jerichen <heiko@jerichen.de>dw
  */
 class View
 {

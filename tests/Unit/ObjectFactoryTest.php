@@ -28,7 +28,8 @@ class ObjectFactoryTest extends TestCase
 
     private ObjectFactory $objectFactory;
     private NamespaceProphecy $php;
-    private ObjectProphecy|Configuration $configuration;
+    /** @var ObjectProphecy<Configuration> */
+    private ObjectProphecy $configuration;
 
     protected function setUp(): void
     {

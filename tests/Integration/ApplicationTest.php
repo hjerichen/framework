@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+/** @noinspection PhpVoidFunctionResultUsedInspection */
+declare(strict_types=1);
 
 namespace HJerichen\Framework\Test\Integration;
 
@@ -25,8 +27,10 @@ class ApplicationTest extends TestCase
     use ProphecyTrait;
 
     private Application $application;
-    private ObjectProphecy|IODevice $ioDevice;
-    private ObjectProphecy|Configuration $configuration;
+    /** @var ObjectProphecy<IODevice> */
+    private ObjectProphecy $ioDevice;
+    /** @var ObjectProphecy<Configuration> */
+    private ObjectProphecy $configuration;
 
     public function setUp(): void
     {

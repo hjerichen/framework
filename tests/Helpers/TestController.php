@@ -1,6 +1,5 @@
 <?php
 /** @noinspection PhpUnused */
-/** @noinspection UnknownInspectionInspection */
 /** @noinspection PhpUnusedParameterInspection */
 declare(strict_types=1);
 
@@ -14,6 +13,7 @@ use HJerichen\Framework\View\View;
 
 /**
  * @author Heiko Jerichen <heiko@jerichen.de>
+ * @psalm-api
  */
 class TestController
 {
@@ -27,6 +27,7 @@ class TestController
         return new HtmlResponse();
     }
 
+    /** @psalm-suppress PossiblyUnusedParam */
     public function simpleResponse(TestControllerDependency $dependency): Response
     {
         return new HtmlResponse('simple');

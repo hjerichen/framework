@@ -77,17 +77,19 @@ class ConfigurationJsonTest extends TestCase
     {
         $this->setUpConfiguration(['something' => 'test']);
 
-        $expected = 'test';
-        $actual = $this->configuration->getCustomValue('something');
-        self::assertEquals($expected, $actual);
+        self::assertEquals(
+            expected: 'test',
+            actual: $this->configuration->getCustomValue('something'),
+        );
     }
 
     public function testGetCustomValueForNotSet(): void
     {
         $this->setUpConfiguration(['some' => 'test']);
 
-        $actual = $this->configuration->getCustomValue('something');
-        self::assertNull($actual);
+        self::assertNull(
+            actual: $this->configuration->getCustomValue('something')
+        );
     }
 
     /* HELPERS */

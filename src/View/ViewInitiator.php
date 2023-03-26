@@ -7,6 +7,7 @@ use HJerichen\Framework\Response\Response;
 
 /**
  * @author Heiko Jerichen <heiko@jerichen.de>
+ * @psalm-api
  */
 class ViewInitiator
 {
