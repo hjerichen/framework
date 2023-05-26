@@ -68,7 +68,10 @@ class Router
         $callable = [$controller, $route->getMethod()];
         $predefinedArguments = $this->getPredefinedArgumentsForControllerMethod();
 
-        /** @psalm-suppress MixedAssignment */
+        /**
+         * @psalm-suppress MixedArgumentTypeCoercion
+         * @psalm-suppress MixedAssignment
+         */
         $response = $methodInvoker->invokeMethod($callable, $predefinedArguments->asArray());
         if ($response instanceof Response) return $response;
 

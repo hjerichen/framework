@@ -4,7 +4,7 @@ namespace HJerichen\Framework\Route;
 
 use HJerichen\Framework\ObjectFactory;
 
-/** @template T */
+/** @template T of object */
 class Route implements RouteInterface
 {
     /**
@@ -22,6 +22,7 @@ class Route implements RouteInterface
         return $this->uri;
     }
 
+    /** @return T */
     public function getInstantiatedClass(ObjectFactory $objectFactory): object
     {
         return $objectFactory->instantiateClass($this->class);

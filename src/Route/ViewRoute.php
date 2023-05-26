@@ -21,7 +21,7 @@ class ViewRoute implements RouteInterface
         return $this->uri;
     }
 
-    public function getInstantiatedClass(ObjectFactory $objectFactory): object
+    public function getInstantiatedClass(ObjectFactory $objectFactory): ViewInitiator
     {
         $predefinedArguments = ['template' => $this->template];
         return $objectFactory->instantiateClass(ViewInitiator::class, $predefinedArguments);
